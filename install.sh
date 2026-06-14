@@ -124,11 +124,8 @@ if ask "¿Instalar drivers NVIDIA?"; then
     echo
     echo "  3. Ejecuta: sudo mkinitcpio -P"
     echo
-    echo "  Con envycontrol (instalado en paso 7) puedes elegir GPU:"
-    echo "    sudo envycontrol -s integrated  → solo Intel (ahorro batería)"
-    echo "    sudo envycontrol -s hybrid      → Intel + NVIDIA bajo demanda"
-    echo "    sudo envycontrol -s nvidia      → solo NVIDIA (máximo rendimiento)"
-    echo "    prime-run <app>                 → corre una app específica en NVIDIA"
+    echo "  Para correr una app específica en NVIDIA:"
+    echo "    prime-run <aplicación>"
     echo
 fi
 
@@ -156,7 +153,6 @@ AUR=(
     bibata-cursor-theme
     gapless
     ntfs-3g
-    envycontrol        # selector de GPU: integrated / hybrid / nvidia
 )
 
 info "Instalando paquetes AUR..."
