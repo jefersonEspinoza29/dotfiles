@@ -17,7 +17,7 @@ Setup minimalista con tema dinámico generado desde el wallpaper usando **matuge
 | Notificaciones | Swaync |
 | Pantalla de bloqueo | Hyprlock + Hypridle |
 | Menú de apagado | Wlogout |
-| Wallpaper | swww |
+| Wallpaper | awww |
 | Colores dinámicos | Matugen |
 | Widgets | Eww |
 | Navegador | Brave |

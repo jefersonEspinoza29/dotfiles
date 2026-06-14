@@ -79,6 +79,9 @@ PKGS=(
     # Cursor
     hyprcursor
 
+    # GTK theme
+    adw-gtk-theme
+
     # Gaming / Herramientas
     mangohud lib32-mangohud
     wofi
@@ -104,13 +107,14 @@ fi
 NVIDIA=false
 if ask "¿Instalar drivers NVIDIA?"; then
     NVIDIA=true
+    # nvidia-open-dkms = driver open-source oficial NVIDIA (Turing/RTX en adelante)
     sudo pacman -S --needed --noconfirm \
-        nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings
+        nvidia-open-dkms nvidia-utils lib32-nvidia-utils nvidia-settings nvidia-prime
     ok "Drivers NVIDIA instalados"
     echo
     warn "NVIDIA requiere configuración MANUAL para no romper el sistema:"
     echo "  1. Edita /etc/mkinitcpio.conf y busca la línea MODULES=(...)"
-    echo "     Agrégale al final dentro del paréntesis:"
+    echo "     Agrégale dentro del paréntesis:"
     echo "       nvidia nvidia_modeset nvidia_uvm nvidia_drm"
     echo "     Ejemplo:"
     echo "       MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)"
@@ -119,6 +123,12 @@ if ask "¿Instalar drivers NVIDIA?"; then
     echo "       nvidia_drm.modeset=1"
     echo
     echo "  3. Ejecuta: sudo mkinitcpio -P"
+    echo
+    echo "  Con envycontrol (instalado en paso 7) puedes elegir GPU:"
+    echo "    sudo envycontrol -s integrated  → solo Intel (ahorro batería)"
+    echo "    sudo envycontrol -s hybrid      → Intel + NVIDIA bajo demanda"
+    echo "    sudo envycontrol -s nvidia      → solo NVIDIA (máximo rendimiento)"
+    echo "    prime-run <app>                 → corre una app específica en NVIDIA"
     echo
 fi
 
@@ -139,14 +149,14 @@ fi
 AUR=(
     brave-bin
     wlogout
-    matugen
-    swww
+    matugen-bin        # compilado, más rápido de instalar que matugen
+    awww               # wallpaper setter (fork de swww)
     eww
     nwg-look
     bibata-cursor-theme
     gapless
-    adw-gtk3
     ntfs-3g
+    envycontrol        # selector de GPU: integrated / hybrid / nvidia
 )
 
 info "Instalando paquetes AUR..."
