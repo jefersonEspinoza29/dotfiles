@@ -64,7 +64,7 @@ PKGS=(
     polkit jq
 
     # Wayland utils
-    grim slurp wl-clipboard
+    grim slurp wl-clipboard cliphist
     xdg-desktop-portal xdg-desktop-portal-gtk
 
     # Fuentes
