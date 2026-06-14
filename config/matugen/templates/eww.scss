@@ -1,0 +1,157 @@
+/* Fondo transparente en todas las ventanas eww */
+window {
+  background-color: transparent;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ==================
+   OSD
+   ================== */
+.osd-container {
+  background-color: rgba({{colors.surface_container_lowest.dark.red}}, {{colors.surface_container_lowest.dark.green}}, {{colors.surface_container_lowest.dark.blue}}, 0.90);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.20);
+  border-radius: 20px;
+  padding: 10px 22px;
+}
+
+.osd-icon {
+  font-size: 20px;
+  color: {{colors.primary.dark.hex}};
+  min-width: 26px;
+}
+
+.osd-label {
+  font-size: 12px;
+  color: {{colors.on_surface.dark.hex}};
+  min-width: 40px;
+}
+
+scale.osd-scale trough {
+  border-radius: 8px;
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.70);
+  min-height: 6px;
+  min-width: 170px;
+}
+
+scale.osd-scale trough highlight {
+  background-color: {{colors.primary.dark.hex}};
+  border-radius: 8px;
+}
+
+scale.osd-scale slider {
+  min-width: 0;
+  min-height: 0;
+}
+
+/* ==================
+   Widget de musica
+   ================== */
+.music-box {
+  background-color: rgba({{colors.surface_container_lowest.dark.red}}, {{colors.surface_container_lowest.dark.green}}, {{colors.surface_container_lowest.dark.blue}}, 0.88);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.18);
+  border-radius: 18px;
+  padding: 14px;
+}
+
+.music-art-box {
+  min-width: 72px;
+  min-height: 72px;
+  border-radius: 10px;
+  background-color: rgba({{colors.surface_container_low.dark.red}}, {{colors.surface_container_low.dark.green}}, {{colors.surface_container_low.dark.blue}}, 0.90);
+  background-size: cover;
+  background-position: center;
+}
+
+.music-art-placeholder {
+  font-size: 32px;
+  color: {{colors.surface_variant.dark.hex}};
+  min-width: 72px;
+  min-height: 72px;
+}
+
+.music-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: {{colors.on_surface.dark.hex}};
+}
+
+.music-artist {
+  font-size: 11px;
+  color: {{colors.outline.dark.hex}};
+}
+
+scale.music-progress-bar trough {
+  border-radius: 6px;
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.60);
+  min-height: 4px;
+}
+
+scale.music-progress-bar trough highlight {
+  background-color: {{colors.primary.dark.hex}};
+  border-radius: 6px;
+}
+
+scale.music-progress-bar slider {
+  min-width: 0;
+  min-height: 0;
+}
+
+.music-time {
+  font-size: 10px;
+  color: {{colors.outline.dark.hex}};
+}
+
+.music-btn {
+  font-size: 16px;
+  color: {{colors.on_surface_variant.dark.hex}};
+  border-radius: 8px;
+  padding: 3px 6px;
+}
+
+.music-btn:hover {
+  color: {{colors.on_surface.dark.hex}};
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+}
+
+.music-btn-play {
+  font-size: 20px;
+  color: {{colors.primary.dark.hex}};
+}
+
+/* Barritas ecualizador (cava) */
+.music-bars {
+  min-height: 50px;
+}
+
+scale.cava-bar {
+  min-width: 8px;
+}
+
+scale.cava-bar trough {
+  min-width: 8px;
+  min-height: 50px;
+  border-radius: 4px;
+  background-color: {{colors.surface_variant.dark.hex}};
+}
+
+scale.cava-bar trough highlight {
+  background-color: {{colors.primary.dark.hex}};
+  border-radius: 4px;
+  min-width: 8px;
+}
+
+scale.cava-bar slider {
+  min-width: 0;
+  min-height: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}

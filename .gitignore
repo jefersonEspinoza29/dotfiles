@@ -1,0 +1,15 @@
+# Generados por matugen (se regeneran al cambiar wallpaper)
+config/wlogout/colors.css
+config/wlogout/icons_colored/
+config/wlogout/icons_default/
+config/kitty/colors.conf
+config/hypr/modules/colors.conf
+config/waybar/style.css
+config/gtk-3.0/gtk.css
+config/gtk-4.0/gtk.css
+config/eww/eww.scss
+
+# Sistema
+*.log
+*.bak
+.DS_Store

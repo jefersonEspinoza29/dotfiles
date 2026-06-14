@@ -1,0 +1,157 @@
+@define-color accent_color {{colors.primary.dark.hex}};
+@define-color accent_bg_color {{colors.primary.dark.hex}};
+@define-color accent_fg_color {{colors.on_primary.dark.hex}};
+
+@define-color destructive_action_color {{colors.error.dark.hex}};
+@define-color destructive_action_bg_color {{colors.error.dark.hex}};
+@define-color destructive_action_fg_color {{colors.on_error.dark.hex}};
+
+@define-color success_color {{colors.tertiary.dark.hex}};
+@define-color success_bg_color {{colors.tertiary.dark.hex}};
+@define-color success_fg_color {{colors.on_tertiary.dark.hex}};
+
+@define-color warning_color {{colors.secondary.dark.hex}};
+@define-color warning_bg_color {{colors.secondary.dark.hex}};
+@define-color warning_fg_color {{colors.on_secondary.dark.hex}};
+
+@define-color error_color {{colors.error.dark.hex}};
+@define-color error_bg_color {{colors.error_container.dark.hex}};
+@define-color error_fg_color {{colors.on_error_container.dark.hex}};
+
+@define-color window_bg_color {{colors.surface_container.dark.hex}};
+@define-color window_fg_color {{colors.on_surface.dark.hex}};
+
+@define-color view_bg_color {{colors.surface_container_lowest.dark.hex}};
+@define-color view_fg_color {{colors.on_surface.dark.hex}};
+
+@define-color headerbar_bg_color {{colors.surface_container_high.dark.hex}};
+@define-color headerbar_fg_color {{colors.on_surface.dark.hex}};
+@define-color headerbar_border_color rgba({{colors.outline.dark.red}}, {{colors.outline.dark.green}}, {{colors.outline.dark.blue}}, 0.50);
+@define-color headerbar_backdrop_color {{colors.surface_container.dark.hex}};
+@define-color headerbar_shade_color rgba({{colors.shadow.dark.red}}, {{colors.shadow.dark.green}}, {{colors.shadow.dark.blue}}, 0.20);
+
+@define-color sidebar_bg_color {{colors.surface_container_low.dark.hex}};
+@define-color sidebar_fg_color {{colors.on_surface.dark.hex}};
+@define-color sidebar_border_color rgba({{colors.outline.dark.red}}, {{colors.outline.dark.green}}, {{colors.outline.dark.blue}}, 0.30);
+
+@define-color card_bg_color {{colors.surface_container_low.dark.hex}};
+@define-color card_fg_color {{colors.on_surface.dark.hex}};
+@define-color card_shade_color rgba({{colors.shadow.dark.red}}, {{colors.shadow.dark.green}}, {{colors.shadow.dark.blue}}, 0.15);
+
+@define-color dialog_bg_color {{colors.surface_container_highest.dark.hex}};
+@define-color dialog_fg_color {{colors.on_surface.dark.hex}};
+
+@define-color popover_bg_color {{colors.surface_container_highest.dark.hex}};
+@define-color popover_fg_color {{colors.on_surface.dark.hex}};
+
+@define-color thumbnail_bg_color {{colors.surface_container.dark.hex}};
+@define-color thumbnail_fg_color {{colors.on_surface.dark.hex}};
+
+@define-color shade_color rgba({{colors.shadow.dark.red}}, {{colors.shadow.dark.green}}, {{colors.shadow.dark.blue}}, 0.35);
+@define-color scrollbar_outline_color {{colors.surface_container_lowest.dark.hex}};
+
+/* ── Thunar ─────────────────────────────────────────────── */
+
+/* Panel lateral */
+placessidebar {
+    background-color: {{colors.surface_container_low.dark.hex}};
+    border-right: 1px solid rgba({{colors.outline.dark.red}}, {{colors.outline.dark.green}}, {{colors.outline.dark.blue}}, 0.20);
+}
+
+placessidebar row {
+    padding: 2px 0;
+    border-radius: 6px;
+    color: {{colors.on_surface_variant.dark.hex}};
+}
+
+placessidebar row:selected,
+placessidebar row:selected:hover {
+    background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.18);
+    color: {{colors.primary.dark.hex}};
+}
+
+placessidebar row:hover {
+    background-color: rgba({{colors.on_surface.dark.red}}, {{colors.on_surface.dark.green}}, {{colors.on_surface.dark.blue}}, 0.06);
+    color: {{colors.on_surface.dark.hex}};
+}
+
+/* Área de archivos (vista íconos y lista) */
+iconview,
+treeview.view {
+    background-color: {{colors.surface_container_lowest.dark.hex}};
+    color: {{colors.on_surface.dark.hex}};
+}
+
+iconview:selected,
+treeview.view:selected {
+    background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.22);
+    color: {{colors.on_surface.dark.hex}};
+}
+
+/* Cabecera de columnas en vista lista */
+treeview.view header button {
+    background-color: {{colors.surface_container.dark.hex}};
+    color: {{colors.on_surface_variant.dark.hex}};
+    border-bottom: 1px solid rgba({{colors.outline.dark.red}}, {{colors.outline.dark.green}}, {{colors.outline.dark.blue}}, 0.20);
+}
+
+/* Barra de ruta (path bar) */
+pathbar button {
+    background: transparent;
+    color: {{colors.on_surface_variant.dark.hex}};
+    border-radius: 6px;
+    padding: 2px 6px;
+}
+
+pathbar button:hover {
+    background-color: rgba({{colors.on_surface.dark.red}}, {{colors.on_surface.dark.green}}, {{colors.on_surface.dark.blue}}, 0.08);
+    color: {{colors.on_surface.dark.hex}};
+}
+
+pathbar button.active,
+pathbar button:checked {
+    color: {{colors.primary.dark.hex}};
+    font-weight: bold;
+}
+
+/* Barra de herramientas */
+toolbar {
+    background-color: {{colors.surface_container_high.dark.hex}};
+    border-bottom: 1px solid rgba({{colors.outline.dark.red}}, {{colors.outline.dark.green}}, {{colors.outline.dark.blue}}, 0.15);
+    padding: 2px;
+}
+
+toolbar button {
+    background: transparent;
+    border-radius: 6px;
+    color: {{colors.on_surface.dark.hex}};
+}
+
+toolbar button:hover {
+    background-color: rgba({{colors.on_surface.dark.red}}, {{colors.on_surface.dark.green}}, {{colors.on_surface.dark.blue}}, 0.10);
+}
+
+/* Barra de estado */
+.thunar-statusbar {
+    background-color: {{colors.surface_container.dark.hex}};
+    color: {{colors.on_surface_variant.dark.hex}};
+    border-top: 1px solid rgba({{colors.outline.dark.red}}, {{colors.outline.dark.green}}, {{colors.outline.dark.blue}}, 0.15);
+    font-size: 12px;
+    padding: 2px 8px;
+}
+
+/* Scrollbars sutiles */
+scrollbar {
+    background-color: transparent;
+}
+
+scrollbar slider {
+    background-color: rgba({{colors.on_surface.dark.red}}, {{colors.on_surface.dark.green}}, {{colors.on_surface.dark.blue}}, 0.25);
+    border-radius: 10px;
+    min-width: 6px;
+    min-height: 6px;
+}
+
+scrollbar slider:hover {
+    background-color: rgba({{colors.on_surface.dark.red}}, {{colors.on_surface.dark.green}}, {{colors.on_surface.dark.blue}}, 0.40);
+}

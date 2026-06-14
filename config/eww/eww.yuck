@@ -1,0 +1,145 @@
+; =====================
+; OSD volumen / brillo
+; =====================
+(defvar osd-value 50)
+(defvar osd-icon "󰕾")
+
+(defwindow osd
+  :monitor 0
+  :geometry (geometry
+    :x "0%"
+    :y "20px"
+    :width "300px"
+    :height "56px"
+    :anchor "bottom center")
+  :stacking "overlay"
+  :exclusive false
+  :focusable false
+  (osd-popup))
+
+(defwidget osd-popup []
+  (box :class "osd-container"
+       :orientation "h"
+       :space-evenly false
+       :spacing 12
+    (label :class "osd-icon" :text osd-icon)
+    (scale :class "osd-scale"
+           :value osd-value
+           :min 0
+           :max 101
+           :active false)
+    (label :class "osd-label" :text "${osd-value}%")))
+
+; =====================
+; Widget de musica
+; =====================
+(defvar music-art-spin "")
+(defvar bar1 2)
+(defvar bar2 2)
+(defvar bar3 2)
+(defvar bar4 2)
+(defvar bar5 2)
+(defvar bar6 2)
+(defvar bar7 2)
+(defvar bar8 2)
+(defvar bar9 2)
+(defvar bar10 2)
+(defvar music-title "Sin música")
+(defvar music-artist " ")
+(defvar music-art "")
+(defvar music-status "Stopped")
+
+(defpoll music-progress
+  :interval "1s"
+  :initial "0"
+  `~/.config/eww/scripts/music-progress.sh`)
+
+(defpoll music-time
+  :interval "1s"
+  :initial "0:00 / 0:00"
+  `~/.config/eww/scripts/music-time.sh`)
+
+(defwindow music-widget
+  :monitor 0
+  :geometry (geometry
+    :x "20px"
+    :y "20px"
+    :width "340px"
+    :height "260px"
+    :anchor "top right")
+  :stacking "bt"
+  :exclusive false
+  :focusable false
+  (music-player))
+
+(defwidget music-player []
+  (box :class "music-box"
+       :orientation "v"
+       :space-evenly false
+       :spacing 10
+    ; Fila superior: portada + titulo/artista
+    (box :orientation "h"
+         :space-evenly false
+         :spacing 14
+      (box :class "music-art-box"
+           :halign "start"
+           :valign "start"
+           :style {music-art-spin != "" ? "background-image: url('${music-art-spin}');" : ""}
+        (label :class "music-art-placeholder"
+               :visible {music-art-spin == ""}
+               :halign "center"
+               :valign "center"
+               :text "󰎆"))
+      (box :orientation "v"
+           :space-evenly false
+           :spacing 5
+           :hexpand true
+           :valign "center"
+        (label :class "music-title"
+               :text music-title
+               :limit-width 20
+               :halign "start"
+               :wrap false)
+        (label :class "music-artist"
+               :text music-artist
+               :limit-width 20
+               :halign "start"
+               :wrap false)))
+    ; Barra de progreso
+    (scale :class "music-progress-bar"
+           :value music-progress
+           :min 0
+           :max 101
+           :active false)
+    ; Tiempo + controles
+    (box :orientation "h"
+         :space-evenly false
+         :hexpand true
+      (label :class "music-time"
+             :text music-time
+             :halign "start"
+             :hexpand true)
+      (box :orientation "h"
+           :space-evenly false
+           :spacing 4
+           :halign "end"
+        (button :class "music-btn" :onclick "playerctl previous" "󰒮")
+        (button :class "music-btn music-btn-play"
+                :onclick "playerctl play-pause"
+                {music-status == "Playing" ? "󰏤" : "󰐊"})
+        (button :class "music-btn" :onclick "playerctl next" "󰒭")))
+    ; Ecualizador cava
+    (box :class "music-bars"
+         :orientation "h"
+         :space-evenly true
+         :hexpand true
+      (scale :class "cava-bar" :orientation "v" :flipped true :value bar1  :min 0 :max 15 :active false)
+      (scale :class "cava-bar" :orientation "v" :flipped true :value bar2  :min 0 :max 15 :active false)
+      (scale :class "cava-bar" :orientation "v" :flipped true :value bar3  :min 0 :max 15 :active false)
+      (scale :class "cava-bar" :orientation "v" :flipped true :value bar4  :min 0 :max 15 :active false)
+      (scale :class "cava-bar" :orientation "v" :flipped true :value bar5  :min 0 :max 15 :active false)
+      (scale :class "cava-bar" :orientation "v" :flipped true :value bar6  :min 0 :max 15 :active false)
+      (scale :class "cava-bar" :orientation "v" :flipped true :value bar7  :min 0 :max 15 :active false)
+      (scale :class "cava-bar" :orientation "v" :flipped true :value bar8  :min 0 :max 15 :active false)
+      (scale :class "cava-bar" :orientation "v" :flipped true :value bar9  :min 0 :max 15 :active false)
+      (scale :class "cava-bar" :orientation "v" :flipped true :value bar10 :min 0 :max 15 :active false))))
