@@ -57,18 +57,18 @@ PKGS=(
 
     # Audio
     pipewire pipewire-pulse wireplumber
-    pavucontrol pamixer playerctl
+    pavucontrol playerctl
 
     # Red / Bluetooth / Sistema
     blueman network-manager-applet nm-connection-editor
-    polkit-gnome jq
+    polkit jq
 
     # Wayland utils
     grim slurp wl-clipboard
-    xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
+    xdg-desktop-portal xdg-desktop-portal-gtk
 
     # Fuentes
-    ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji
+    ttf-jetbrains-mono-nerd noto-fonts-emoji
 
     # Plymouth (splash de arranque)
     plymouth
