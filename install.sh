@@ -153,11 +153,16 @@ AUR=(
     bibata-cursor-theme
     gapless
     ntfs-3g
+    auto-cpufreq
 )
 
 info "Instalando paquetes AUR..."
 yay -S --needed --noconfirm "${AUR[@]}"
 ok "AUR instalados"
+
+# Habilitar auto-cpufreq (control dinámico de frecuencia CPU)
+sudo systemctl enable --now auto-cpufreq
+ok "auto-cpufreq habilitado"
 
 # ── 8. Plymouth ──────────────────────────────────────────────
 if ask "¿Instalar Plymouth (splash de arranque)?"; then
