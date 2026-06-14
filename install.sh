@@ -189,7 +189,11 @@ fi
 # ── 9. Tema SDDM astronaut ───────────────────────────────────
 if ask "¿Instalar tema SDDM astronaut?"; then
     bash -c "$(curl -fsSL https://raw.githubusercontent.com/keyitdev/sddm-astronaut-theme/master/setup.sh)"
-    ok "Tema SDDM instalado"
+    # Aplicar configuración de tema y teclado virtual
+    sudo cp "$DOTFILES/sddm/sddm.conf" /etc/sddm.conf
+    sudo mkdir -p /etc/sddm.conf.d
+    sudo cp "$DOTFILES/sddm/sddm.conf.d/virtualkbd.conf" /etc/sddm.conf.d/virtualkbd.conf
+    ok "Tema SDDM instalado y configurado"
 fi
 
 # ── 10. LibreOffice ──────────────────────────────────────────
