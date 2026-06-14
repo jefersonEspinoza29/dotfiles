@@ -106,17 +106,20 @@ if ask "¿Instalar drivers NVIDIA?"; then
     NVIDIA=true
     sudo pacman -S --needed --noconfirm \
         nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings
-
-    info "Configurando NVIDIA en mkinitcpio..."
-    if ! grep -q "nvidia" /etc/mkinitcpio.conf; then
-        sudo sed -i 's/^MODULES=(\(.*\))/MODULES=(\1 nvidia nvidia_modeset nvidia_uvm nvidia_drm)/' \
-            /etc/mkinitcpio.conf
-    fi
-    if ! grep -q "nvidia_drm.modeset=1" /etc/kernel/cmdline 2>/dev/null; then
-        sudo bash -c 'echo -n " nvidia_drm.modeset=1" >> /etc/kernel/cmdline'
-    fi
-    sudo mkinitcpio -P
-    ok "NVIDIA configurado"
+    ok "Drivers NVIDIA instalados"
+    echo
+    warn "NVIDIA requiere configuración MANUAL para no romper el sistema:"
+    echo "  1. Edita /etc/mkinitcpio.conf y busca la línea MODULES=(...)"
+    echo "     Agrégale al final dentro del paréntesis:"
+    echo "       nvidia nvidia_modeset nvidia_uvm nvidia_drm"
+    echo "     Ejemplo:"
+    echo "       MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)"
+    echo
+    echo "  2. Edita /etc/kernel/cmdline y agrega al FINAL de la línea:"
+    echo "       nvidia_drm.modeset=1"
+    echo
+    echo "  3. Ejecuta: sudo mkinitcpio -P"
+    echo
 fi
 
 # ── 6. Brillo (desde fuente) ─────────────────────────────────
@@ -151,14 +154,25 @@ yay -S --needed --noconfirm "${AUR[@]}"
 ok "AUR instalados"
 
 # ── 8. Plymouth ──────────────────────────────────────────────
-if ask "¿Configurar Plymouth (splash de arranque)?"; then
-    if ! grep -q "plymouth" /etc/mkinitcpio.conf; then
-        sudo cp /etc/mkinitcpio.conf /etc/mkinitcpio.conf.bak
-        sudo sed -i -E 's/^(HOOKS=\([^)]*)udev/\1udev plymouth/' /etc/mkinitcpio.conf
-        sudo mkinitcpio -P
-    fi
-    warn "Agrega 'quiet splash' al final de 'options' en /boot/loader/entries/*.conf"
-    ok "Plymouth configurado"
+if ask "¿Instalar Plymouth (splash de arranque)?"; then
+    ok "Plymouth ya fue instalado con los paquetes base"
+    echo
+    warn "Plymouth requiere configuración MANUAL:"
+    echo "  1. Edita /etc/mkinitcpio.conf y en la línea HOOKS=(...)"
+    echo "     agrega 'plymouth' justo después de 'udev':"
+    echo "       HOOKS=(base udev plymouth autodetect ...)"
+    echo
+    echo "  2. Ejecuta: sudo mkinitcpio -P"
+    echo
+    echo "  3. Edita tu entry en /boot/loader/entries/*.conf"
+    echo "     y agrega al FINAL de la línea 'options':"
+    echo "       quiet splash"
+    echo "     Ejemplo:"
+    echo "       options root=UUID=xxxx rw quiet splash"
+    echo
+    echo "  4. Para ver temas disponibles: sudo plymouth-set-default-theme -l"
+    echo "     Para aplicar uno:           sudo plymouth-set-default-theme -R TEMA"
+    echo
 fi
 
 # ── 9. Tema SDDM astronaut ───────────────────────────────────
