@@ -48,6 +48,7 @@
 (defvar music-artist " ")
 (defvar music-art "")
 (defvar music-status "Stopped")
+(defvar music-source "󰝚")
 
 (defpoll music-progress
   :interval "1s"
@@ -95,11 +96,16 @@
            :spacing 5
            :hexpand true
            :valign "center"
-        (label :class "music-title"
-               :text music-title
-               :limit-width 20
-               :halign "start"
-               :wrap false)
+        (box :orientation "h"
+             :space-evenly false
+             :spacing 6
+             :halign "start"
+          (label :class "music-source" :text music-source)
+          (label :class "music-title"
+                 :text music-title
+                 :limit-width 17
+                 :halign "start"
+                 :wrap false))
         (label :class "music-artist"
                :text music-artist
                :limit-width 20

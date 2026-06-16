@@ -47,10 +47,16 @@ while true; do
             if [ "$TITLE" != "$LAST_TITLE" ] || [ "$PLAYER" != "$LAST_PLAYER" ]; then
                 ARTIST=$(playerctl --player="$PLAYER" metadata --format '{{artist}}' 2>/dev/null)
                 ART=$(playerctl --player="$PLAYER" metadata mpris:artUrl 2>/dev/null | sed 's|file://||')
+                case "$PLAYER" in
+                    com.github.neithern.g4music) SOURCE="" ;;
+                    brave.*) SOURCE="󰖟" ;;
+                    *) SOURCE="󰝚" ;;
+                esac
                 eww update \
                     music-title="${TITLE:-Sin música}" \
                     music-artist="${ARTIST:- }" \
-                    music-status="$STATUS"
+                    music-status="$STATUS" \
+                    music-source="$SOURCE"
                 if [ -n "$ART" ] && [ -f "$ART" ]; then
                     eww update music-art-spin="$ART"
                 else

@@ -76,6 +76,11 @@ scale.osd-scale slider {
   min-height: 72px;
 }
 
+.music-source {
+  font-size: 11px;
+  color: {{colors.primary.dark.hex}};
+}
+
 .music-title {
   font-size: 13px;
   font-weight: bold;
