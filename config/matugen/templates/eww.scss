@@ -79,6 +79,7 @@ scale.osd-scale slider {
 .music-source {
   font-size: 11px;
   color: {{colors.primary.dark.hex}};
+  min-width: 16px;
 }
 
 .music-title {
@@ -89,6 +90,7 @@ scale.osd-scale slider {
 
 .music-artist {
   font-size: 11px;
+  
   color: {{colors.outline.dark.hex}};
 }
 
