@@ -11,15 +11,24 @@ pkill waybar
 sleep 0.3
 waybar &
 
+# Reiniciar swaync
+pkill swaync
+sleep 0.3
+swaync &
+
 # Reiniciar EWW
+pkill -f "music-monitor.sh" 2>/dev/null
+pkill -f "cava.sh" 2>/dev/null
+pkill -f "art-spin.sh" 2>/dev/null
 eww kill
 sleep 0.3
 eww daemon
 
-# Reabrir music-widget solo si estaba abierto
+# Reabrir music-widget y relanzar monitor si estaba abierto
 if [ "$MUSIC_OPEN" -gt 0 ]; then
     sleep 0.2
     eww open music-widget
+    systemd-run --user --no-block bash ~/.config/eww/scripts/music-monitor.sh
 fi
 
 notify-send -u low -i dialog-information "Hyprland" "Config recargada"
