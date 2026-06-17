@@ -102,8 +102,8 @@ blankwindow {
     margin: 2px;
 }
 
-/* ===== SLIDERS (volumen y brillo) ===== */
-.widget-slider {
+/* ===== VOLUMEN ===== */
+.widget-volume {
     background: var(--surface);
     border-radius: var(--radius);
     border: 1px solid var(--border);
@@ -111,38 +111,72 @@ blankwindow {
     margin-bottom: 5px;
 }
 
-.widget-slider label {
-    font-family: "JetBrainsMono Nerd Font Mono";
-    font-size: 16px;
+.widget-volume label {
+    font-family: "JetBrainsMono Nerd Font Mono", "JetBrainsMono NF", monospace;
+    font-size: 14px;
     color: var(--accent);
-    min-width: 24px;
-    margin-right: 8px;
+    min-width: 22px;
+    margin-right: 6px;
 }
 
-.widget-slider scale {
-    margin: 0;
-    padding: 0;
-}
-
-.widget-slider scale trough {
+.widget-volume scale trough {
     background: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.5);
     border-radius: 10px;
     min-height: 4px;
 }
 
-.widget-slider scale highlight {
+.widget-volume scale highlight {
     background: var(--accent);
     border-radius: 10px;
     min-height: 4px;
 }
 
-.widget-slider scale slider {
+.widget-volume scale slider {
     background: var(--accent);
     border-radius: 50%;
     min-width: 14px;
     min-height: 14px;
     margin: -5px 0;
     box-shadow: 0 0 6px var(--accent-glow);
+    border: none;
+}
+
+/* ===== BRILLO ===== */
+.widget-backlight {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    margin-bottom: 5px;
+}
+
+.widget-backlight label {
+    font-family: "JetBrainsMono Nerd Font Mono", "JetBrainsMono NF", monospace;
+    font-size: 14px;
+    color: {{colors.secondary.dark.hex}};
+    min-width: 22px;
+    margin-right: 6px;
+}
+
+.widget-backlight scale trough {
+    background: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.5);
+    border-radius: 10px;
+    min-height: 4px;
+}
+
+.widget-backlight scale highlight {
+    background: {{colors.secondary.dark.hex}};
+    border-radius: 10px;
+    min-height: 4px;
+}
+
+.widget-backlight scale slider {
+    background: {{colors.secondary.dark.hex}};
+    border-radius: 50%;
+    min-width: 14px;
+    min-height: 14px;
+    margin: -5px 0;
+    box-shadow: 0 0 6px rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.25);
     border: none;
 }
 

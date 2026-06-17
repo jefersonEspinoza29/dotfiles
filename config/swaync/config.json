@@ -17,8 +17,8 @@
   "widgets": [
     "title",
     "dnd",
-    "slider#volume",
-    "slider#brightness",
+    "volume",
+    "backlight",
     "mpris",
     "notifications"
   ],
@@ -32,19 +32,14 @@
     "dnd": {
       "text": "No molestar"
     },
-    "slider#volume": {
-      "label": "󰕾",
-      "cmd_getter": "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{printf \"%d\", $2 * 100}'",
-      "cmd_setter": "wpctl set-volume @DEFAULT_AUDIO_SINK@ $value%",
-      "min": 0,
-      "max": 100
+    "volume": {
+      "label": "󰕾"
     },
-    "slider#brightness": {
+    "backlight": {
       "label": "󰃟",
-      "cmd_getter": "brillo -G | awk '{printf \"%d\", $1}'",
-      "cmd_setter": "brillo -S $value",
-      "min": 1,
-      "max": 100
+      "device": "nvidia_wmi_ec_backlight",
+      "subsystem": "backlight",
+      "min": 1
     },
     "mpris": {
       "image-size": 64,
