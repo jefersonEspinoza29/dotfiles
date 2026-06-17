@@ -102,8 +102,8 @@ blankwindow {
     margin: 2px;
 }
 
-/* ===== VOLUMEN ===== */
-.widget-volume {
+/* ===== SLIDERS (volumen y brillo) ===== */
+.widget-slider {
     background: var(--surface);
     border-radius: var(--radius);
     border: 1px solid var(--border);
@@ -111,74 +111,40 @@ blankwindow {
     margin-bottom: 5px;
 }
 
-.widget-volume > box > label {
-    font-size: 14px;
+.widget-slider label {
+    font-family: JetBrainsMono Nerd Font, monospace;
+    font-size: 11px;
+    font-weight: 600;
     color: var(--accent);
-    min-width: 20px;
-    margin-right: 6px;
+    min-width: 24px;
+    margin-right: 8px;
 }
 
-.widget-volume scale {
+.widget-slider scale {
     margin: 0;
     padding: 0;
 }
 
-.widget-volume scale trough {
+.widget-slider scale trough {
     background: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.5);
     border-radius: 10px;
     min-height: 4px;
 }
 
-.widget-volume scale highlight {
+.widget-slider scale highlight {
     background: var(--accent);
     border-radius: 10px;
     min-height: 4px;
 }
 
-.widget-volume scale slider {
+.widget-slider scale slider {
     background: var(--accent);
     border-radius: 50%;
     min-width: 14px;
     min-height: 14px;
     margin: -5px 0;
     box-shadow: 0 0 6px var(--accent-glow);
-}
-
-/* ===== BRILLO ===== */
-.widget-backlight {
-    background: var(--surface);
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    padding: 8px 12px;
-    margin-bottom: 5px;
-}
-
-.widget-backlight > box > label {
-    font-size: 14px;
-    color: {{colors.secondary.dark.hex}};
-    min-width: 20px;
-    margin-right: 6px;
-}
-
-.widget-backlight scale trough {
-    background: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.5);
-    border-radius: 10px;
-    min-height: 4px;
-}
-
-.widget-backlight scale highlight {
-    background: {{colors.secondary.dark.hex}};
-    border-radius: 10px;
-    min-height: 4px;
-}
-
-.widget-backlight scale slider {
-    background: {{colors.secondary.dark.hex}};
-    border-radius: 50%;
-    min-width: 14px;
-    min-height: 14px;
-    margin: -5px 0;
-    box-shadow: 0 0 6px rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.25);
+    border: none;
 }
 
 /* ===== MPRIS ===== */
