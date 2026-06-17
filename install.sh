@@ -66,7 +66,7 @@ PKGS=(
 
     # Wayland utils
     grim slurp wl-clipboard cliphist
-    xdg-desktop-portal xdg-desktop-portal-gtk
+    xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-hyprland
 
     # Fuentes
     ttf-jetbrains-mono-nerd noto-fonts-emoji
@@ -162,7 +162,13 @@ info "Instalando paquetes AUR..."
 yay -S --needed --noconfirm "${AUR[@]}"
 ok "AUR instalados"
 
-# Habilitar auto-cpufreq (control dinámico de frecuencia CPU)
+# Habilitar servicios del sistema
+sudo systemctl enable --now NetworkManager
+ok "NetworkManager habilitado"
+
+sudo systemctl enable --now bluetooth
+ok "bluetooth habilitado"
+
 sudo systemctl enable --now auto-cpufreq
 ok "auto-cpufreq habilitado"
 
