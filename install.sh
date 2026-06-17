@@ -58,10 +58,11 @@ PKGS=(
     # Audio
     pipewire pipewire-pulse wireplumber
     pavucontrol playerctl
+    ffmpeg cava
 
     # Red / Bluetooth / Sistema
     blueman network-manager-applet nm-connection-editor
-    polkit jq
+    polkit jq lsof
 
     # Wayland utils
     grim slurp wl-clipboard cliphist
@@ -152,6 +153,7 @@ AUR=(
     nwg-look
     bibata-cursor-theme
     gapless
+    g4music
     ntfs-3g
     auto-cpufreq
 )
