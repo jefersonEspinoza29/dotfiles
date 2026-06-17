@@ -52,6 +52,20 @@ while true; do
                     brave.*) SOURCE="󰖟" ;;
                     *) SOURCE="󰝚" ;;
                 esac
+                # Cachear duración real (g4music no expone mpris:length correctamente)
+                LEN_MPRIS=$(playerctl --player="$PLAYER" metadata mpris:length 2>/dev/null)
+                if [ -z "$LEN_MPRIS" ] || [ "$LEN_MPRIS" -eq 0 ] 2>/dev/null; then
+                    PID=$(pgrep -f "g4music\|$(basename "$PLAYER")" 2>/dev/null | head -1)
+                    AUDIO_FILE=$(lsof -F n -p "$PID" 2>/dev/null | grep -E '^n.*\.(mp3|flac|ogg|opus|wav|m4a|aac)$' | sed 's/^n//' | head -1)
+                    if [ -n "$AUDIO_FILE" ]; then
+                        DUR=$(ffprobe -v quiet -show_entries format=duration -of csv=p=0 "$AUDIO_FILE" 2>/dev/null | awk '{printf "%d", $1}')
+                        echo "${DUR:-0}" > /tmp/eww-song-length
+                    else
+                        echo "0" > /tmp/eww-song-length
+                    fi
+                else
+                    echo "$((LEN_MPRIS / 1000000))" > /tmp/eww-song-length
+                fi
                 eww update \
                     music-title="${TITLE:-Sin música}" \
                     music-artist="${ARTIST:- }" \
