@@ -9,7 +9,7 @@
   "control-center-margin-left": 20,
 
   "control-center-width": 360,
-  "control-center-height": 600,
+  "control-center-height": 640,
   "notification-window-width": 360,
 
   "timeout": 5,
@@ -17,6 +17,8 @@
   "widgets": [
     "title",
     "dnd",
+    "volume",
+    "backlight",
     "mpris",
     "notifications"
   ],
@@ -27,6 +29,17 @@
 
   "dnd": {
     "text": "No molestar"
+  },
+
+  "volume": {
+    "label": "󰕾"
+  },
+
+  "backlight": {
+    "label": "󰃟",
+    "device": "nvidia_wmi_ec_backlight",
+    "subsystem": "backlight",
+    "min": 1
   },
 
   "mpris": {
