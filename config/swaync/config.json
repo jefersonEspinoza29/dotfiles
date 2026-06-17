@@ -8,14 +8,16 @@
   "control-center-margin-bottom": 20,
   "control-center-margin-left": 20,
 
-  "control-center-width": 380,
+  "control-center-width": 360,
   "control-center-height": 600,
+  "notification-window-width": 360,
 
   "timeout": 5,
 
   "widgets": [
     "title",
     "dnd",
+    "mpris",
     "notifications"
   ],
 
@@ -25,5 +27,10 @@
 
   "dnd": {
     "text": "No molestar"
+  },
+
+  "mpris": {
+    "image-size": 64,
+    "image-radius": 8
   }
 }
