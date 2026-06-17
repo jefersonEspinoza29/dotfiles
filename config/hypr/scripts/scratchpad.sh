@@ -1,22 +1,14 @@
 #!/bin/bash
-SCRATCH_FILE="/tmp/scratchpad-origin-ws"
-
 ACTIVE=$(hyprctl activewindow -j)
 WS=$(echo "$ACTIVE" | jq -r '.workspace.name // empty')
-CLASS=$(echo "$ACTIVE" | jq -r '.class // empty')
+ADDR=$(echo "$ACTIVE" | jq -r '.address // empty')
 
-[ "$CLASS" = "com.github.neithern.g4music" ] && exit 0
+[ -z "$ADDR" ] && exit 0
 
-# ¿Hay una ventana oculta en scratch?
-SCRATCH_WIN=$(hyprctl clients -j | jq -r '[.[] | select(.workspace.name == "special:scratch")] | first | .address // empty')
-
-if [ -n "$SCRATCH_WIN" ]; then
-    # Restaurar al workspace donde está el cursor
+if [ "$WS" = "special:scratch" ]; then
+    # Sacar al workspace activo del monitor con foco
     TARGET=$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .activeWorkspace.id')
-    hyprctl dispatch movetoworkspacesilent "${TARGET},address:${SCRATCH_WIN}"
-    rm -f "$SCRATCH_FILE"
+    hyprctl dispatch movetoworkspacesilent "${TARGET},address:${ADDR}"
 else
-    # Ocultar ventana activa: guardar workspace y mandar a scratch
-    [ -z "$WS" ] && exit 0
-    hyprctl dispatch movetoworkspacesilent special:scratch
+    hyprctl dispatch movetoworkspacesilent special:scratch,address:${ADDR}
 fi
