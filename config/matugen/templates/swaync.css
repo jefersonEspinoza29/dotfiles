@@ -20,7 +20,7 @@ blankwindow {
 }
 
 * {
-    font-family: JetBrainsMono Nerd Font;
+    font-family: "JetBrainsMono Nerd Font Mono";
     font-size: 11px;
     color: var(--text);
 }
@@ -112,9 +112,8 @@ blankwindow {
 }
 
 .widget-slider label {
-    font-family: JetBrainsMono Nerd Font, monospace;
-    font-size: 11px;
-    font-weight: 600;
+    font-family: "JetBrainsMono Nerd Font Mono";
+    font-size: 16px;
     color: var(--accent);
     min-width: 24px;
     margin-right: 8px;
@@ -158,7 +157,7 @@ blankwindow {
     border-radius: var(--radius);
     background: var(--surface);
     border: 1px solid var(--border);
-    overflow: hidden;
+
 }
 
 .widget-mpris .widget-mpris-player .mpris-overlay {
@@ -211,7 +210,7 @@ blankwindow {
     border: 1px solid var(--accent);
     box-shadow: 0 0 12px var(--accent-glow), 0 4px 16px rgba(0, 0, 0, 0.4);
     padding: 0;
-    overflow: hidden;
+
     transition: box-shadow 0.2s ease;
 }
 

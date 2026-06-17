@@ -23,33 +23,35 @@
     "notifications"
   ],
 
-  "title": {
-    "text": "Notificaciones"
-  },
-
-  "dnd": {
-    "text": "No molestar"
-  },
-
   "widget-config": {
+    "title": {
+      "text": "Notificaciones",
+      "clear-all-button": true,
+      "button-text": "Limpiar"
+    },
+    "dnd": {
+      "text": "No molestar"
+    },
     "slider#volume": {
-      "label": "Vol",
+      "label": "󰕾",
       "cmd_getter": "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{printf \"%d\", $2 * 100}'",
       "cmd_setter": "wpctl set-volume @DEFAULT_AUDIO_SINK@ $value%",
       "min": 0,
       "max": 100
     },
     "slider#brightness": {
-      "label": "Bri",
+      "label": "󰃟",
       "cmd_getter": "brillo -G | awk '{printf \"%d\", $1}'",
       "cmd_setter": "brillo -S $value",
       "min": 1,
       "max": 100
+    },
+    "mpris": {
+      "image-size": 64,
+      "image-radius": 8
+    },
+    "notifications": {
+      "vexpand": true
     }
-  },
-
-  "mpris": {
-    "image-size": 64,
-    "image-radius": 8
   }
 }
