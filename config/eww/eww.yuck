@@ -116,6 +116,8 @@
 
 (defvar wifi-connect-ssid "")
 (defvar wifi-connect-pass "")
+(defvar wifi-connect-error "")
+(defvar wifi-pass-show false)
 
 ; Overlay — cierra el popup de contraseña al hacer clic fuera
 (defwindow wifi-pass-overlay
@@ -128,7 +130,7 @@
   :exclusive false
   :focusable false
   (button :class "wifi-overlay-btn"
-          :onclick "eww close wifi-password-widget && eww close wifi-pass-overlay && eww update wifi-connect-pass=''"
+          :onclick "eww close wifi-password-widget && eww close wifi-pass-overlay && eww update wifi-connect-pass='' && eww update wifi-connect-error='' && eww update wifi-pass-show=false && eww open wifi-overlay && eww open wifi-widget"
           ""))
 
 (defwindow wifi-password-widget
@@ -152,11 +154,30 @@
            :text wifi-connect-ssid
            :halign "start"
            :limit-width 24)
-    (input :class "wifi-pass-input"
-           :value wifi-connect-pass
-           :password true
-           :onchange "eww update wifi-connect-pass={}"
-           :onaccept "~/.config/eww/scripts/wifi-connect.sh")))
+    (box :orientation "h" :space-evenly false :spacing 6
+      (input :class "wifi-pass-input"
+             :hexpand true
+             :password {!wifi-pass-show}
+             :onchange "eww update wifi-connect-pass={}"
+             :onaccept "~/.config/eww/scripts/wifi-connect.sh")
+      (button :class "wifi-pass-eye"
+              :onclick "~/.config/eww/scripts/wifi-pass-toggle.sh"
+              {wifi-pass-show ? "󰛑" : "󰛐"}))
+    (label :class {wifi-connect-error == "Conectando..." ? "wifi-pass-status" : "wifi-pass-error"}
+           :visible {wifi-connect-error != ""}
+           :text wifi-connect-error
+           :halign "start"
+           :wrap true)
+    (box :class "wifi-pass-buttons"
+         :orientation "h"
+         :space-evenly true
+         :spacing 8
+      (button :class "wifi-pass-btn wifi-pass-cancel"
+              :onclick "eww close wifi-password-widget && eww close wifi-pass-overlay && eww update wifi-connect-pass='' && eww update wifi-connect-error='' && eww update wifi-pass-show=false && eww open wifi-overlay && eww open wifi-widget"
+              "Cancelar")
+      (button :class "wifi-pass-btn wifi-pass-accept"
+              :onclick "~/.config/eww/scripts/wifi-connect.sh"
+              "Conectar"))))
 
 ; Overlay invisible — cierra el widget al hacer clic fuera
 (defwindow wifi-overlay

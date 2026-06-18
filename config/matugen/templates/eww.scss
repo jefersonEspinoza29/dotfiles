@@ -213,6 +213,67 @@ entry.wifi-pass-input:focus {
   background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.60);
 }
 
+.wifi-pass-error {
+  font-size: 11px;
+  color: {{colors.error.dark.hex}};
+}
+
+.wifi-pass-status {
+  font-size: 11px;
+  color: {{colors.on_surface_variant.dark.hex}};
+}
+
+button.wifi-pass-eye {
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.40);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.22);
+  border-radius: 8px;
+  color: {{colors.on_surface_variant.dark.hex}};
+  padding: 0 8px;
+  font-size: 14px;
+  min-height: 0;
+  min-width: 0;
+}
+
+button.wifi-pass-eye:hover {
+  color: {{colors.primary.dark.hex}};
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.70);
+}
+
+.wifi-pass-buttons {
+  margin-top: 4px;
+}
+
+button.wifi-pass-btn {
+  border-radius: 8px;
+  padding: 5px 0;
+  font-size: 12px;
+  font-weight: bold;
+  border: 1px solid transparent;
+  min-height: 0;
+}
+
+button.wifi-pass-cancel {
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.50);
+  color: {{colors.on_surface_variant.dark.hex}};
+  border-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.15);
+}
+
+button.wifi-pass-cancel:hover {
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.80);
+  color: {{colors.on_surface.dark.hex}};
+}
+
+button.wifi-pass-accept {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.25);
+  color: {{colors.primary.dark.hex}};
+  border-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.35);
+}
+
+button.wifi-pass-accept:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.45);
+  color: {{colors.on_primary.dark.hex}};
+}
+
 /* ==================
    Widget de musica
    ================== */

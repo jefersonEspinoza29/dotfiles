@@ -12,21 +12,22 @@ iface=$(nmcli -t -f DEVICE,TYPE dev 2>/dev/null | awk -F: '$2=="wifi" {print $1}
 # Rescan no bloqueante
 nmcli dev wifi rescan ifname "$iface" 2>/dev/null &
 
-# Leer hasta 10 redes: IN-USE:SSID:SIGNAL:SECURITY
-# --escape no evita que los : del SSID se escapen con \
-mapfile -t lines < <(nmcli --escape no -t -f IN-USE,SSID,SIGNAL,SECURITY dev wifi 2>/dev/null | head -10)
+# Leer todas las redes: IN-USE:SSID:SIGNAL:SECURITY
+mapfile -t lines < <(nmcli --escape no -t -f IN-USE,SSID,SIGNAL,SECURITY dev wifi 2>/dev/null)
 
 if [ ${#lines[@]} -eq 0 ]; then
     echo '(label :class "wifi-no-networks" :text "Sin redes disponibles")'
     exit 0
 fi
 
+connected_row=""
 rows=""
+count=0
+
 for line in "${lines[@]}"; do
     [ -z "$line" ] && continue
 
     # Parsear: IN-USE:SSID:SIGNAL:SECURITY
-    # Signal y security son los últimos 2 campos (sin dos puntos internos)
     security=$(echo "$line" | awk -F: '{print $NF}')
     signal=$(echo "$line" | awk -F: '{print $(NF-1)}')
     inuse=$(echo "$line" | awk -F: '{print $1}')
@@ -63,23 +64,32 @@ for line in "${lines[@]}"; do
     if [ "$inuse" = "*" ]; then
         action="(button :class \"wifi-btn wifi-btn-disconnect\" :tooltip \"Desconectar\" :onclick \"nmcli dev disconnect ${iface}\" \"󰤭\")"
         row_class="wifi-network-row wifi-network-connected"
-    elif [ -n "$security" ] && [ "$security" != "--" ]; then
-        action="(button :class \"wifi-btn wifi-btn-connect\" :tooltip \"Conectar\" :onclick \"eww update wifi-connect-ssid=\\\"${ssid_clean}\\\" && eww close wifi-widget && eww close wifi-overlay && eww open wifi-pass-overlay && eww open wifi-password-widget\" \"󰤨\")"
-        row_class="wifi-network-row"
-    else
-        action="(button :class \"wifi-btn wifi-btn-connect\" :tooltip \"Conectar\" :onclick \"nmcli dev wifi connect '${ssid_clean}'\" \"󰤨\")"
-        row_class="wifi-network-row"
-    fi
-
-    rows+=" (box :class \"${row_class}\" :orientation \"h\" :space-evenly false :spacing 8
+        connected_row=" (box :class \"${row_class}\" :orientation \"h\" :space-evenly false :spacing 8
       (label :class \"wifi-signal-icon\" :text \"${sig_icon}\")
       (label :class \"wifi-network-name\" :text \"${ssid_clean}\" :hexpand true :halign \"start\" :limit-width 16)
       (label :class \"wifi-lock-icon\" :text \"${lock_icon}\")
       ${action})"
+    else
+        [ "$count" -ge 9 ] && continue
+        if [ -n "$security" ] && [ "$security" != "--" ]; then
+            action="(button :class \"wifi-btn wifi-btn-connect\" :tooltip \"Conectar\" :onclick \"eww update wifi-connect-ssid=\\\"${ssid_clean}\\\" && eww update wifi-connect-error=\\\"\\\" && eww update wifi-pass-show=false && eww close wifi-widget && eww close wifi-overlay && eww open wifi-pass-overlay && eww open wifi-password-widget\" \"󰤨\")"
+        else
+            action="(button :class \"wifi-btn wifi-btn-connect\" :tooltip \"Conectar\" :onclick \"nmcli dev wifi connect '${ssid_clean}'\" \"󰤨\")"
+        fi
+        row_class="wifi-network-row"
+        rows+=" (box :class \"${row_class}\" :orientation \"h\" :space-evenly false :spacing 8
+      (label :class \"wifi-signal-icon\" :text \"${sig_icon}\")
+      (label :class \"wifi-network-name\" :text \"${ssid_clean}\" :hexpand true :halign \"start\" :limit-width 16)
+      (label :class \"wifi-lock-icon\" :text \"${lock_icon}\")
+      ${action})"
+        (( count++ ))
+    fi
 done
 
-if [ -z "$rows" ]; then
+all_rows="${connected_row}${rows}"
+
+if [ -z "$all_rows" ]; then
     echo '(label :class "wifi-no-networks" :text "Sin redes")'
 else
-    printf '(box :orientation "v" :space-evenly false :spacing 4 %s)\n' "$rows"
+    printf '(box :orientation "v" :space-evenly false :spacing 4 %s)\n' "$all_rows"
 fi
