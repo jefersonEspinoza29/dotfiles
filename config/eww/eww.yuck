@@ -31,6 +31,78 @@
     (label :class "osd-label" :text "${osd-value}%")))
 
 ; =====================
+; Widget de Bluetooth
+; =====================
+(defpoll bt-power
+  :interval "3s"
+  :initial "off"
+  `~/.config/eww/scripts/bt-power.sh`)
+
+(defpoll bt-devices
+  :interval "3s"
+  :initial "(label :class \"bt-no-devices\" :text \"Cargando...\")"
+  `~/.config/eww/scripts/bt-devices.sh`)
+
+; Overlay invisible — cierra el widget al hacer clic fuera
+(defwindow bt-overlay
+  :monitor 0
+  :geometry (geometry
+    :x "0px"
+    :y "48px"
+    :width "100%"
+    :height "1032px"
+    :anchor "top left")
+  :stacking "foreground"
+  :exclusive false
+  :focusable false
+  (bt-overlay-widget))
+
+(defwidget bt-overlay-widget []
+  (button :class "bt-overlay-btn"
+          :onclick "eww close bluetooth-widget && eww close bt-overlay"
+          ""))
+
+(defwindow bluetooth-widget
+  :monitor 0
+  :geometry (geometry
+    :x "90px"
+    :y "0px"
+    :width "280px"
+    :anchor "top right")
+  :stacking "overlay"
+  :exclusive false
+  :focusable false
+  (bluetooth-panel))
+
+(defwidget bluetooth-panel []
+  (box :class "bt-box"
+       :orientation "v"
+       :space-evenly false
+       :spacing 10
+    ; Header: icono + título + toggle
+    (box :orientation "h"
+         :space-evenly false
+         :spacing 8
+      (label :class "bt-header-icon"
+             :text {bt-power == "on" ? "󰂯" : "󰂲"})
+      (label :class "bt-header-title"
+             :text "Bluetooth"
+             :hexpand true
+             :halign "start")
+      (button :class "bt-power-btn"
+              :style {bt-power == "on" ? "color: #a6e3a1;" : "color: #6c7086;"}
+              :onclick "~/.config/eww/scripts/bt-power-toggle.sh"
+              {bt-power == "on" ? "󰔡" : "󰔣"}))
+    ; Separador
+    (box :class "bt-separator" :hexpand true)
+    ; Lista de dispositivos (contenido dinámico vía literal)
+    (literal :content bt-devices)
+    ; Botón para abrir el gestor completo
+    (button :class "bt-manager-btn"
+            :onclick "blueman-manager &"
+            "󰖡  Gestor Bluetooth")))
+
+; =====================
 ; Widget de musica
 ; =====================
 (defvar music-art-spin "")

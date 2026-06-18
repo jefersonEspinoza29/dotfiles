@@ -95,7 +95,7 @@
         "format-on":        "󰂯",
         "format-connected": "󰂱 {device_alias}",
         "format-disabled":  "󰂲",
-        "on-click": "bluetoothctl show | grep -q 'Powered: yes' && bluetoothctl power off || bluetoothctl power on",
+        "on-click": "~/.config/eww/scripts/bt-toggle.sh",
         "on-click-right": "blueman-manager",
         "tooltip-format-off": "Bluetooth apagado",
         "tooltip-format-on": "Bluetooth encendido\nSin dispositivos",
@@ -112,7 +112,7 @@
         "tooltip-format-wifi":     "{essid}\n{signalStrength}% — {ipaddr}",
         "tooltip-format-ethernet": "{ifname}\n{ipaddr}",
         "tooltip-format-disconnected": "Sin conexión",
-        "on-click": "sh -c 'if pgrep nm-applet > /dev/null; then pkill nm-applet; else nm-applet --indicator & fi'",
+        "on-click": "~/.config/eww/scripts/wifi-widget-toggle.sh",
         "interval": 3
     },
 
