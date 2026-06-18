@@ -227,13 +227,11 @@ if ask "¿Instalar control RGB del teclado (Predator Helios 300)?"; then
     git clone https://github.com/JafarAkhondali/acer-predator-turbo-and-rgb-keyboard-linux-module "$tmp/rgb"
     (cd "$tmp/rgb" && chmod +x ./*.sh && sudo ./install_service.sh)
     rm -rf "$tmp"
-    ok "RGB instalado en /opt/turbo-fan/"
-    echo
-    echo "  Modos RGB disponibles:"
-    echo "    Wave:    python /opt/turbo-fan/facer_rgb.py -m 3 -s 5 -b 100"
-    echo "    Breath:  python /opt/turbo-fan/facer_rgb.py -m 1 -s 4 -b 100 -cR 255 -cG 0 -cB 255"
-    echo "    Neon:    python /opt/turbo-fan/facer_rgb.py -m 2 -s 3 -b 100"
-    echo "    Apagar:  python /opt/turbo-fan/facer_rgb.py -m 0 -b 0"
+    # Aplicar efecto Wave por defecto al arranque
+    echo "" | sudo tee -a /opt/turbo-fan/service.sh > /dev/null
+    echo "python /opt/turbo-fan/facer_rgb.py -m 3 -s 3 -b 100" | sudo tee -a /opt/turbo-fan/service.sh > /dev/null
+    sudo systemctl restart turbo-fan
+    ok "RGB instalado en /opt/turbo-fan/ — Wave activo por defecto"
 fi
 
 # ── 13. Copiar configuraciones ───────────────────────────────
