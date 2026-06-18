@@ -357,3 +357,73 @@
       (scale :class "cava-bar" :orientation "v" :flipped true :value bar8  :min 0 :max 15 :active false)
       (scale :class "cava-bar" :orientation "v" :flipped true :value bar9  :min 0 :max 15 :active false)
       (scale :class "cava-bar" :orientation "v" :flipped true :value bar10 :min 0 :max 15 :active false))))
+
+; =====================
+; Widget de sistema (CPU + RAM)
+; =====================
+(defpoll cpu-value
+  :interval "2s"
+  :initial "0"
+  `~/.config/eww/scripts/cpu-usage.sh`)
+
+(defpoll ram-value
+  :interval "3s"
+  :initial "0"
+  `~/.config/eww/scripts/ram-usage.sh`)
+
+(defpoll ram-info
+  :interval "3s"
+  :initial "0/0"
+  `~/.config/eww/scripts/ram-info.sh`)
+
+(defwindow system-widget
+  :monitor 0
+  :geometry (geometry
+    :x "20px"
+    :y "300px"
+    :width "280px"
+    :anchor "top right")
+  :stacking "bt"
+  :exclusive false
+  :focusable false
+  (system-stats))
+
+(defwidget system-stats []
+  (box :class "sys-box"
+       :orientation "h"
+       :space-evenly true
+       :spacing 30
+    (sys-ring :icon "󰻠"
+              :label "CPU"
+              :value cpu-value
+              :ring-class "cpu-ring"
+              :color "#a6c8ff")
+    (sys-ring :icon "󰍛"
+              :label "RAM"
+              :value ram-value
+              :ring-class "ram-ring"
+              :color "#a6e3a1"
+              :sublabel ram-info)))
+
+(defwidget sys-ring [icon label value ring-class color ?sublabel]
+  (box :orientation "v"
+       :space-evenly false
+       :spacing 5
+       :halign "center"
+    (circular-progress
+      :value {value == "" ? 0 : value}
+      :min 0
+      :max 100
+      :thickness 10
+      :class ring-class
+      (box :class "sys-ring-inner"
+           :orientation "v"
+           :space-evenly false
+           :halign "center"
+           :valign "center"
+        (label :class "sys-percent"
+               :text "${value}%")))
+    (label :class "sys-label" :text label)
+    (label :class "sys-sublabel"
+           :visible {sublabel != ""}
+           :text sublabel)))

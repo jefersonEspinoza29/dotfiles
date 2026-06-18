@@ -517,3 +517,49 @@ scale.cava-bar slider {
   min-width: 1920px;
   min-height: 1032px;
 }
+
+/* ==================
+   Widget de sistema
+   ================== */
+.sys-box {
+  background-color: rgba({{colors.surface_container_lowest.dark.red}}, {{colors.surface_container_lowest.dark.green}}, {{colors.surface_container_lowest.dark.blue}}, 0.88);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.18);
+  border-radius: 18px;
+  padding: 20px 24px;
+}
+
+circular-progress.cpu-ring {
+  color: {{colors.primary.dark.hex}};
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.40);
+  min-width: 120px;
+  min-height: 120px;
+}
+
+circular-progress.ram-ring {
+  color: {{colors.secondary.dark.hex}};
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.40);
+  min-width: 120px;
+  min-height: 120px;
+}
+
+.sys-ring-inner {
+  min-width: 105px;
+  min-height: 105px;
+}
+
+.sys-percent {
+  font-size: 20px;
+  font-weight: bold;
+  color: {{colors.on_surface.dark.hex}};
+  margin-top: 40px;
+}
+
+.sys-label {
+  font-size: 13px;
+  color: {{colors.outline.dark.hex}};
+}
+
+.sys-sublabel {
+  font-size: 11px;
+  color: {{colors.outline_variant.dark.hex}};
+}
