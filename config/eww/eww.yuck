@@ -89,8 +89,7 @@
              :text "Bluetooth"
              :hexpand true
              :halign "start")
-      (button :class "bt-power-btn"
-              :style {bt-power == "on" ? "color: #a6e3a1;" : "color: #6c7086;"}
+      (button :class {bt-power == "on" ? "bt-power-btn bt-power-on" : "bt-power-btn bt-power-off"}
               :onclick "~/.config/eww/scripts/bt-power-toggle.sh"
               {bt-power == "on" ? "󰔡" : "󰔣"}))
     ; Separador
