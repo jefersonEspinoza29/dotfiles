@@ -250,14 +250,20 @@ chmod +x ~/.config/hypr/scripts/*.sh 2>/dev/null || true
 chmod +x ~/.config/eww/scripts/*.sh  2>/dev/null || true
 chmod +x ~/.config/wlogout/colorize.py            || true
 
-# ── 14. Wallpapers ───────────────────────────────────────────
+# ── 14. Shell config ─────────────────────────────────────────
+if [ -f "$DOTFILES/.bashrc" ]; then
+    cp "$DOTFILES/.bashrc" "$HOME/.bashrc"
+    ok "~/.bashrc"
+fi
+
+# ── 15. Wallpapers ──────────────────────────────────────────
 if [ -d "$DOTFILES/wallpapers" ]; then
     mkdir -p "$HOME/Wallpapers"
     cp -r "$DOTFILES/wallpapers/." "$HOME/Wallpapers/"
     ok "Wallpapers copiados a ~/Wallpapers"
 fi
 
-# ── 15. Generar colores con matugen ──────────────────────────
+# ── 16. Generar colores con matugen ──────────────────────────
 FIRST_WALL=$(find "$HOME/Wallpapers" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) 2>/dev/null | head -1)
 if [[ -n "${FIRST_WALL:-}" ]]; then
     info "Generando colores iniciales con matugen..."
@@ -265,7 +271,7 @@ if [[ -n "${FIRST_WALL:-}" ]]; then
     ok "Colores generados"
 fi
 
-# ── 16. Habilitar SDDM ───────────────────────────────────────
+# ── 17. Habilitar SDDM ───────────────────────────────────────
 if ask "¿Habilitar SDDM al inicio del sistema?"; then
     sudo systemctl enable sddm
     sudo systemctl set-default graphical.target
