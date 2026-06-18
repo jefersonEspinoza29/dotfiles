@@ -9,7 +9,12 @@ pkill -f "art-spin.sh" 2>/dev/null
 eww kill 2>/dev/null
 sleep 0.8
 eww daemon &
-sleep 0.5
+
+# Esperar hasta que el daemon responda (max 3s)
+for i in $(seq 1 12); do
+    eww ping 2>/dev/null && break
+    sleep 0.25
+done
 
 if [ "$MUSIC_OPEN" -gt 0 ]; then
     eww open music-widget
