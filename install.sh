@@ -69,7 +69,7 @@ PKGS=(
     xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-hyprland
 
     # Fuentes
-    ttf-jetbrains-mono-nerd noto-fonts-emoji
+    ttf-jetbrains-mono-nerd noto-fonts-emoji noto-fonts-cjk
 
     # Plymouth (splash de arranque)
     plymouth
