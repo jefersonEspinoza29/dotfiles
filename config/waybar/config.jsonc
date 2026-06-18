@@ -15,6 +15,9 @@
     "format": "{icon}{windows}",
     "format-window-separator": " ",
     "format-icons": {
+        "active": "",
+        "occupied": "",
+        "default": "",
         "empty": "󰄰",
         "urgent": "󱅫"
     },
