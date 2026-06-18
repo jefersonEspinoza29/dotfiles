@@ -51,6 +51,138 @@ scale.osd-scale slider {
 }
 
 /* ==================
+   Widget de WiFi
+   ================== */
+.wifi-box {
+  background-color: rgba({{colors.surface_container_lowest.dark.red}}, {{colors.surface_container_lowest.dark.green}}, {{colors.surface_container_lowest.dark.blue}}, 0.92);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.20);
+  border-radius: 18px;
+  padding: 14px;
+}
+
+.wifi-header-icon {
+  font-size: 20px;
+  color: {{colors.primary.dark.hex}};
+  min-width: 24px;
+}
+
+.wifi-header-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: {{colors.on_surface.dark.hex}};
+}
+
+.wifi-power-btn {
+  font-size: 20px;
+  border-radius: 8px;
+  padding: 2px 6px;
+}
+
+.wifi-power-btn:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+}
+
+.wifi-power-on {
+  color: {{colors.primary.dark.hex}};
+}
+
+.wifi-power-off {
+  color: {{colors.outline_variant.dark.hex}};
+}
+
+.wifi-separator {
+  min-height: 1px;
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+  border-radius: 1px;
+}
+
+.wifi-no-networks {
+  font-size: 12px;
+  color: {{colors.outline_variant.dark.hex}};
+  padding: 6px 0;
+}
+
+.wifi-network-row {
+  padding: 6px 4px;
+  border-radius: 10px;
+}
+
+.wifi-network-row:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.07);
+}
+
+.wifi-network-connected .wifi-network-name {
+  color: {{colors.primary.dark.hex}};
+}
+
+.wifi-signal-icon {
+  font-size: 16px;
+  color: {{colors.primary.dark.hex}};
+  min-width: 20px;
+}
+
+.wifi-network-name {
+  font-size: 12px;
+  color: {{colors.on_surface_variant.dark.hex}};
+}
+
+.wifi-lock-icon {
+  font-size: 11px;
+  color: {{colors.outline.dark.hex}};
+  min-width: 14px;
+}
+
+.wifi-btn {
+  font-size: 15px;
+  border-radius: 8px;
+  padding: 3px 6px;
+  color: {{colors.outline.dark.hex}};
+}
+
+.wifi-btn:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+  color: {{colors.on_surface.dark.hex}};
+}
+
+.wifi-btn-connect {
+  color: {{colors.primary.dark.hex}};
+}
+
+.wifi-btn-connect:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+  color: {{colors.primary.dark.hex}};
+}
+
+.wifi-btn-disconnect {
+  color: {{colors.secondary.dark.hex}};
+}
+
+.wifi-btn-disconnect:hover {
+  background-color: rgba({{colors.secondary.dark.red}}, {{colors.secondary.dark.green}}, {{colors.secondary.dark.blue}}, 0.12);
+  color: {{colors.secondary.dark.hex}};
+}
+
+.wifi-manager-btn {
+  font-size: 12px;
+  color: {{colors.outline.dark.hex}};
+  border-radius: 10px;
+  padding: 6px 10px;
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+}
+
+.wifi-manager-btn:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.10);
+  color: {{colors.primary.dark.hex}};
+  border-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.25);
+}
+
+.wifi-overlay-btn {
+  background: transparent;
+  min-width: 1920px;
+  min-height: 1032px;
+}
+
+/* ==================
    Widget de musica
    ================== */
 .music-box {

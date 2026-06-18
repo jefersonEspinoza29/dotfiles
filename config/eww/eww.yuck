@@ -102,6 +102,77 @@
             "󰖡  Gestor Bluetooth")))
 
 ; =====================
+; Widget de WiFi
+; =====================
+(defpoll wifi-power
+  :interval "3s"
+  :initial "on"
+  `~/.config/eww/scripts/wifi-power.sh`)
+
+(defpoll wifi-networks
+  :interval "10s"
+  :initial "(label :class \"wifi-no-networks\" :text \"Escaneando...\")"
+  `~/.config/eww/scripts/wifi-networks.sh`)
+
+; Overlay invisible — cierra el widget al hacer clic fuera
+(defwindow wifi-overlay
+  :monitor 0
+  :geometry (geometry
+    :x "0px"
+    :y "48px"
+    :width "100%"
+    :height "1032px"
+    :anchor "top left")
+  :stacking "foreground"
+  :exclusive false
+  :focusable false
+  (wifi-overlay-widget))
+
+(defwidget wifi-overlay-widget []
+  (button :class "wifi-overlay-btn"
+          :onclick "eww close wifi-widget && eww close wifi-overlay"
+          ""))
+
+(defwindow wifi-widget
+  :monitor 0
+  :geometry (geometry
+    :x "90px"
+    :y "0px"
+    :width "280px"
+    :anchor "top right")
+  :stacking "overlay"
+  :exclusive false
+  :focusable false
+  (wifi-panel))
+
+(defwidget wifi-panel []
+  (box :class "wifi-box"
+       :orientation "v"
+       :space-evenly false
+       :spacing 10
+    ; Header: icono + título + toggle
+    (box :orientation "h"
+         :space-evenly false
+         :spacing 8
+      (label :class "wifi-header-icon"
+             :text {wifi-power == "on" ? "󰤨" : "󰤭"})
+      (label :class "wifi-header-title"
+             :text "Wi-Fi"
+             :hexpand true
+             :halign "start")
+      (button :class {wifi-power == "on" ? "wifi-power-btn wifi-power-on" : "wifi-power-btn wifi-power-off"}
+              :onclick "~/.config/eww/scripts/wifi-power-toggle.sh"
+              {wifi-power == "on" ? "󰔡" : "󰔣"}))
+    ; Separador
+    (box :class "wifi-separator" :hexpand true)
+    ; Lista de redes (contenido dinámico vía literal)
+    (literal :content wifi-networks)
+    ; Botón para abrir el gestor completo
+    (button :class "wifi-manager-btn"
+            :onclick "nm-connection-editor &"
+            "󰤨  Gestor de Red")))
+
+; =====================
 ; Widget de musica
 ; =====================
 (defvar music-art-spin "")
