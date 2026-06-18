@@ -183,6 +183,37 @@ scale.osd-scale slider {
 }
 
 /* ==================
+   WiFi - popup password
+   ================== */
+.wifi-pass-box {
+  background-color: rgba({{colors.surface_container_lowest.dark.red}}, {{colors.surface_container_lowest.dark.green}}, {{colors.surface_container_lowest.dark.blue}}, 0.96);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.22);
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+
+.wifi-pass-ssid {
+  font-size: 13px;
+  font-weight: bold;
+  color: {{colors.primary.dark.hex}};
+}
+
+entry.wifi-pass-input {
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.40);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.22);
+  border-radius: 8px;
+  color: {{colors.on_surface.dark.hex}};
+  padding: 6px 10px;
+  font-size: 13px;
+  min-height: 0;
+}
+
+entry.wifi-pass-input:focus {
+  border-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.55);
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.60);
+}
+
+/* ==================
    Widget de musica
    ================== */
 .music-box {

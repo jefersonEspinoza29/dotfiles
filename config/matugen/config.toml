@@ -10,7 +10,7 @@ post_hook = "pkill -SIGUSR2 waybar"
 [templates.eww]
 input_path = "~/.config/matugen/templates/eww.scss"
 output_path = "~/.config/eww/eww.scss"
-post_hook = "eww kill; sleep 0.5; eww daemon"
+post_hook = "sed -i '/@charset/d' ~/.config/eww/eww.scss; eww kill; sleep 0.5; eww daemon"
 
 [templates.hyprland-colors]
 input_path = "~/.config/matugen/templates/hyprland-colors.conf"

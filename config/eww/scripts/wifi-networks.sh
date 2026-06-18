@@ -63,6 +63,9 @@ for line in "${lines[@]}"; do
     if [ "$inuse" = "*" ]; then
         action="(button :class \"wifi-btn wifi-btn-disconnect\" :tooltip \"Desconectar\" :onclick \"nmcli dev disconnect ${iface}\" \"󰤭\")"
         row_class="wifi-network-row wifi-network-connected"
+    elif [ -n "$security" ] && [ "$security" != "--" ]; then
+        action="(button :class \"wifi-btn wifi-btn-connect\" :tooltip \"Conectar\" :onclick \"eww update wifi-connect-ssid=\\\"${ssid_clean}\\\" && eww close wifi-widget && eww close wifi-overlay && eww open wifi-pass-overlay && eww open wifi-password-widget\" \"󰤨\")"
+        row_class="wifi-network-row"
     else
         action="(button :class \"wifi-btn wifi-btn-connect\" :tooltip \"Conectar\" :onclick \"nmcli dev wifi connect '${ssid_clean}'\" \"󰤨\")"
         row_class="wifi-network-row"

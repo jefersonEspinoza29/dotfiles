@@ -114,6 +114,50 @@
   :initial "(label :class \"wifi-no-networks\" :text \"Escaneando...\")"
   `~/.config/eww/scripts/wifi-networks.sh`)
 
+(defvar wifi-connect-ssid "")
+(defvar wifi-connect-pass "")
+
+; Overlay — cierra el popup de contraseña al hacer clic fuera
+(defwindow wifi-pass-overlay
+  :monitor 0
+  :geometry (geometry
+    :width "100%"
+    :height "100%"
+    :anchor "top left")
+  :stacking "foreground"
+  :exclusive false
+  :focusable false
+  (button :class "wifi-overlay-btn"
+          :onclick "eww close wifi-password-widget && eww close wifi-pass-overlay && eww update wifi-connect-pass=''"
+          ""))
+
+(defwindow wifi-password-widget
+  :monitor 0
+  :geometry (geometry
+    :x "0px"
+    :y "0px"
+    :width "280px"
+    :anchor "center")
+  :stacking "overlay"
+  :exclusive false
+  :focusable true
+  (wifi-password-panel))
+
+(defwidget wifi-password-panel []
+  (box :class "wifi-pass-box"
+       :orientation "v"
+       :space-evenly false
+       :spacing 8
+    (label :class "wifi-pass-ssid"
+           :text wifi-connect-ssid
+           :halign "start"
+           :limit-width 24)
+    (input :class "wifi-pass-input"
+           :value wifi-connect-pass
+           :password true
+           :onchange "eww update wifi-connect-pass={}"
+           :onaccept "~/.config/eww/scripts/wifi-connect.sh")))
+
 ; Overlay invisible — cierra el widget al hacer clic fuera
 (defwindow wifi-overlay
   :monitor 0
