@@ -1,78 +1,422 @@
-/* ===== BASE ===== */
-* {
-    font-family: JetBrainsMono Nerd Font;
-    font-size: 12px;
+:root {
+    --bg:           rgba(12, 14, 19, 0.96);
+    --surface:      rgba(25, 28, 32, 0.95);
+    --hover:        rgba(67, 71, 78, 0.95);
+    --border:       rgba(166, 200, 255, 0.08);
+    --accent:       #a6c8ff;
+    --accent-glow:  rgba(166, 200, 255, 0.30);
+    --accent-dim:   rgba(166, 200, 255, 0.12);
+    --text:         #e1e2e9;
+    --text-sub:     #c3c6cf;
+    --text-dim:     #8d9199;
+    --error:        #ffb4ab;
+    --radius:       12px;
+    --radius-sm:    8px;
 }
 
-/* ===== PANEL FLOTANTE ===== */
+notificationwindow,
+blankwindow {
+    background: transparent;
+}
+
+* {
+    font-family: "JetBrainsMono Nerd Font Mono";
+    font-size: 11px;
+    color: var(--text);
+}
+
+/* ===== PANEL ===== */
 .control-center {
-    background: rgba(20, 20, 20, 0.89);
-    backdrop-filter: blur(25px);
+    background: var(--bg);
+    border-radius: 16px;
+    border: 1px solid rgba(166, 200, 255, 0.12);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+    padding: 10px;
+}
 
-    border-radius: 18px;
-    padding: 12px;
+.control-center .control-center-list {
+    background: transparent;
+}
 
-    border: 1px solid rgba(255,255,255,0.06);
-
-    box-shadow: 0px 10px 30px rgba(0,0,0,0.5);
+.control-center .control-center-list-placeholder {
+    color: var(--text-dim);
+    opacity: 0.4;
 }
 
 /* ===== HEADER ===== */
 .widget-title {
-    background: rgba(40,40,40,0.5);
-    border-radius: 14px;
-    padding: 10px;
-    margin-bottom: 10px;
-    color: #e6e6e6;
+    background: transparent;
+    padding: 4px 4px 8px;
+    margin-bottom: 2px;
+}
+
+.widget-title > label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.widget-title > button {
+    background: var(--surface);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    color: var(--text-sub);
+    font-size: 10px;
+    padding: 3px 10px;
+}
+
+.widget-title > button:hover {
+    background: var(--hover);
+    color: var(--text);
 }
 
 /* ===== DND ===== */
 .widget-dnd {
-    background: rgba(40,40,40,0.5);
-    border-radius: 14px;
-    padding: 10px;
-    margin-bottom: 12px;
+    background: transparent;
+    padding: 2px 4px 8px;
+    margin-bottom: 4px;
 }
 
-/* ===== NOTIFICACIONES ===== */
-.notification {
-    background: rgba(30,30,30,0.5);
-    backdrop-filter: blur(15px);
-
-    border-radius: 16px;
-    padding: 12px;
-    margin-bottom: 10px;
-
-    border: 1px solid rgba(255,255,255,0.05);
-
-    box-shadow: 0px 5px 20px rgba(0,0,0,0.4);
-
-    transition: all 0.2s ease;
+.widget-dnd label {
+    font-size: 11px;
+    color: var(--text-sub);
 }
 
-/* hover suave */
-.notification:hover {
-    background: rgba(50,50,50,0.6);
-    transform: scale(1.01);
+.widget-dnd switch {
+    background: rgba(67, 71, 78, 0.6);
+    border-radius: 20px;
+    border: none;
+    min-width: 36px;
+    min-height: 20px;
 }
 
-/* ===== TEXTO ===== */
-.notification-title {
-    color: #ffffff;
-    font-weight: 600;
+.widget-dnd switch:checked {
+    background: rgba(166, 200, 255, 0.5);
 }
 
-.notification-content {
-    color: #cccccc;
+.widget-dnd switch slider {
+    background: var(--text);
+    border-radius: 50%;
+    min-width: 15px;
+    min-height: 15px;
+    margin: 2px;
 }
 
-/* ===== BOTONES ===== */
-button {
-    background: rgba(60,60,60,0.5);
+/* ===== VOLUMEN ===== */
+.widget-volume {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    margin-bottom: 5px;
+}
+
+.widget-volume label {
+    font-family: "JetBrainsMono Nerd Font Mono", "JetBrainsMono NF", monospace;
+    font-size: 14px;
+    color: var(--accent);
+    min-width: 22px;
+    margin-right: 6px;
+}
+
+.widget-volume scale trough {
+    background: rgba(67, 71, 78, 0.5);
     border-radius: 10px;
-    color: #e6e6e6;
+    min-height: 4px;
 }
 
-button:hover {
-    background: rgba(80,80,80,0.6);
+.widget-volume scale highlight {
+    background: var(--accent);
+    border-radius: 10px;
+    min-height: 4px;
+}
+
+.widget-volume scale slider {
+    background: var(--accent);
+    border-radius: 50%;
+    min-width: 14px;
+    min-height: 14px;
+    margin: -5px 0;
+    box-shadow: 0 0 6px var(--accent-glow);
+    border: none;
+}
+
+/* ===== BRILLO ===== */
+.widget-backlight {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    margin-bottom: 5px;
+}
+
+.widget-backlight label {
+    font-family: "JetBrainsMono Nerd Font Mono", "JetBrainsMono NF", monospace;
+    font-size: 14px;
+    color: #bcc7dc;
+    min-width: 22px;
+    margin-right: 6px;
+}
+
+.widget-backlight scale trough {
+    background: rgba(67, 71, 78, 0.5);
+    border-radius: 10px;
+    min-height: 4px;
+}
+
+.widget-backlight scale highlight {
+    background: #bcc7dc;
+    border-radius: 10px;
+    min-height: 4px;
+}
+
+.widget-backlight scale slider {
+    background: #bcc7dc;
+    border-radius: 50%;
+    min-width: 14px;
+    min-height: 14px;
+    margin: -5px 0;
+    box-shadow: 0 0 6px rgba(166, 200, 255, 0.25);
+    border: none;
+}
+
+/* ===== MPRIS ===== */
+.widget-mpris {
+    padding: 0;
+    margin-bottom: 6px;
+}
+
+.widget-mpris .widget-mpris-player {
+    margin: 0 2px 6px;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--border);
+
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay {
+    padding: 12px;
+    background: rgba(12, 14, 19, 0.6);
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-title {
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--text);
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-subtitle {
+    font-size: 10px;
+    color: var(--text-sub);
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay button {
+    background: transparent;
+    border: none;
+    color: var(--text);
+    border-radius: var(--radius-sm);
+    padding: 4px 8px;
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay button:hover {
+    background: var(--accent-dim);
+}
+
+/* ===== FILA ===== */
+.notification-row {
+    background: transparent;
+    outline: none;
+    margin-bottom: 5px;
+}
+
+.notification-row:focus {
+    background: transparent;
+}
+
+.notification-row .notification-background {
+    padding: 0 2px;
+}
+
+/* ===== TARJETA ===== */
+.notification-row .notification-background .notification {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 12px var(--accent-glow), 0 4px 16px rgba(0, 0, 0, 0.4);
+    padding: 0;
+
+    transition: box-shadow 0.2s ease;
+}
+
+.notification-row .notification-background .notification:hover {
+    box-shadow: 0 0 18px var(--accent-glow), 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.notification-row .notification-background .notification.critical {
+    border-color: var(--error);
+    box-shadow: 0 0 12px rgba(255, 180, 171, 0.35), 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.notification-row .notification-background .notification.low {
+    border-color: var(--border);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== ACCIÓN PRINCIPAL ===== */
+.notification-row .notification-background .notification .notification-default-action {
+    padding: 10px 12px;
+    background: var(--surface);
+    border: none;
+    border-radius: var(--radius);
+    transition: background 0.15s ease;
+}
+
+.notification-row .notification-background .notification .notification-default-action:hover {
+    background: var(--hover);
+}
+
+.notification-row .notification-background .notification .notification-default-action:not(:only-child) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content {
+    background: transparent;
+    padding: 0;
+}
+
+/* ===== ICONO ===== */
+.notification-row .notification-background .notification .notification-default-action .notification-content .image {
+    -gtk-icon-size: 40px;
+    border-radius: var(--radius-sm);
+    margin: 0 10px 0 0;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .app-icon {
+    -gtk-icon-size: 14px;
+    margin: 2px;
+}
+
+/* ===== TEXTOS ===== */
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box label {
+    filter: none;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .summary {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    text-shadow: none;
+    background: transparent;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .time {
+    font-size: 9px;
+    color: var(--text-dim);
+    text-shadow: none;
+    background: transparent;
+    margin-right: 24px;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .body {
+    font-size: 11px;
+    color: var(--text-sub);
+    text-shadow: none;
+    background: transparent;
+    margin-top: 2px;
+}
+
+/* ===== BOTONES DE ACCIÓN ===== */
+.notification-row .notification-background .notification .notification-alt-actions {
+    background: rgba(12, 14, 19, 0.5);
+    border-top: 1px solid var(--border);
+    border-bottom-left-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
+    padding: 5px 8px;
+}
+
+.notification-row .notification-background .notification .notification-action {
+    margin: 2px;
+    padding: 0;
+}
+
+.notification-row .notification-background .notification .notification-action > button {
+    background: transparent;
+    border-radius: var(--radius-sm);
+    color: var(--text-sub);
+    padding: 4px 12px;
+    font-size: 10px;
+    border: none;
+}
+
+.notification-row .notification-background .notification .notification-action > button:hover {
+    background: var(--accent-dim);
+    color: var(--accent);
+}
+
+/* ===== BOTÓN CERRAR ===== */
+.close-button {
+    background: transparent;
+    color: var(--text-dim);
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+    margin: 5px 5px 0 0;
+    min-width: 18px;
+    min-height: 18px;
+    box-shadow: none;
+    text-shadow: none;
+    font-size: 10px;
+}
+
+.close-button:hover {
+    background: rgba(255, 180, 171, 0.2);
+    color: var(--error);
+}
+
+/* ===== GRUPOS ===== */
+.notification-group {
+    transition: opacity 200ms ease-in-out;
+}
+
+.notification-group.collapsed.not-expanded {
+    opacity: 0.4;
+}
+
+.notification-group .notification-group-close-button .close-button {
+    margin: 8px 16px;
+}
+
+.notification-group .notification-group-buttons,
+.notification-group .notification-group-headers {
+    margin: 0 12px;
+    color: var(--text-sub);
+}
+
+.notification-group .notification-group-headers .notification-group-icon {
+    -gtk-icon-size: 22px;
+    color: var(--text-sub);
+}
+
+.notification-group.collapsed .notification-row .notification {
+    background: var(--hover);
+}
+
+/* ===== POPUP FLOTANTE ===== */
+.floating-notifications {
+    background: transparent;
+}
+
+.floating-notifications .notification-row .notification-background .notification {
+    background: rgba(12, 14, 19, 0.97);
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 16px var(--accent-glow), 0 8px 28px rgba(0, 0, 0, 0.7);
+}
+
+.floating-notifications .notification-row .notification-background .notification .notification-default-action {
+    background: rgba(12, 14, 19, 0.97);
+}
+
+.floating-notifications .notification-row .notification-background .notification .notification-default-action:hover {
+    background: var(--hover);
 }

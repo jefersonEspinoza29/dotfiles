@@ -13,6 +13,8 @@
   "notification-window-width": 360,
 
   "timeout": 5,
+  "timeout-low": 5,
+  "timeout-critical": 8,
 
   "widgets": [
     "title",
