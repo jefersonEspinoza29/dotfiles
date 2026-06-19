@@ -256,14 +256,18 @@ if [ -f "$DOTFILES/.bashrc" ]; then
     ok "~/.bashrc"
 fi
 
-# ── 15. Wallpapers ──────────────────────────────────────────
+# ── 15. Directorios de usuario ───────────────────────────────
+mkdir -p "$HOME/Imagenes/Capturas"
+ok "~/Imagenes/Capturas"
+
+# ── 17. Wallpapers ──────────────────────────────────────────
 if [ -d "$DOTFILES/wallpapers" ]; then
     mkdir -p "$HOME/Wallpapers"
     cp -r "$DOTFILES/wallpapers/." "$HOME/Wallpapers/"
     ok "Wallpapers copiados a ~/Wallpapers"
 fi
 
-# ── 16. Generar colores con matugen ──────────────────────────
+# ── 18. Generar colores con matugen ──────────────────────────
 FIRST_WALL=$(find "$HOME/Wallpapers" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) 2>/dev/null | head -1)
 if [[ -n "${FIRST_WALL:-}" ]]; then
     info "Generando colores iniciales con matugen..."
@@ -271,7 +275,7 @@ if [[ -n "${FIRST_WALL:-}" ]]; then
     ok "Colores generados"
 fi
 
-# ── 17. Habilitar SDDM ───────────────────────────────────────
+# ── 19. Habilitar SDDM ───────────────────────────────────────
 if ask "¿Habilitar SDDM al inicio del sistema?"; then
     sudo systemctl enable sddm
     sudo systemctl set-default graphical.target
