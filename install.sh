@@ -224,7 +224,7 @@ fi
 if ask "¿Instalar control RGB del teclado (Predator Helios 300)?"; then
     sudo pacman -S --needed --noconfirm linux-headers gcc make dkms
     tmp=$(mktemp -d)
-    git clone https://github.com/JafarAkhondali/acer-predator-turbo-and-rgb-keyboard-linux-module "$tmp/rgb"
+    git clone https://github.com/jefersonEspinoza29/acer-predator-turbo-rgb-linux "$tmp/rgb"
     (cd "$tmp/rgb" && chmod +x ./*.sh && sudo ./install_service.sh)
     rm -rf "$tmp"
     # Aplicar efecto Wave por defecto al arranque
