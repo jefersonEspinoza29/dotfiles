@@ -6,6 +6,8 @@
 set -euo pipefail
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PLYMOUTH_THEME_NAME="supramk4-jheff"
+PLYMOUTH_THEME_REPO="$DOTFILES/plymouth/$PLYMOUTH_THEME_NAME"
 
 # ── Colores ──────────────────────────────────────────────────
 R='\033[0;31m'; G='\033[0;32m'; Y='\033[1;33m'; B='\033[0;34m'; N='\033[0m'
@@ -63,6 +65,7 @@ PKGS=(
     # Red / Bluetooth / Sistema
     blueman network-manager-applet nm-connection-editor
     polkit jq lsof
+    git curl
 
     # Wayland utils
     grim slurp wl-clipboard cliphist
@@ -175,43 +178,51 @@ ok "auto-cpufreq habilitado"
 # ── 8. Plymouth ──────────────────────────────────────────────
 if ask "¿Instalar Plymouth (splash de arranque)?"; then
     ok "Plymouth ya fue instalado con los paquetes base"
+
+    if [ -f "$PLYMOUTH_THEME_REPO/$PLYMOUTH_THEME_NAME.plymouth" ]; then
+        info "Instalando tema Plymouth $PLYMOUTH_THEME_NAME..."
+        sudo mkdir -p "/usr/share/plymouth/themes/$PLYMOUTH_THEME_NAME"
+        sudo cp -r "$PLYMOUTH_THEME_REPO/." "/usr/share/plymouth/themes/$PLYMOUTH_THEME_NAME/"
+        sudo rm -rf "/usr/share/plymouth/themes/$PLYMOUTH_THEME_NAME/.git"
+        if sudo plymouth-set-default-theme -R "$PLYMOUTH_THEME_NAME"; then
+            ok "Tema Plymouth $PLYMOUTH_THEME_NAME aplicado"
+        else
+            warn "No se pudo aplicar el tema Plymouth automáticamente"
+        fi
+    else
+        warn "No encontré el tema $PLYMOUTH_THEME_NAME"
+        echo "  Copia tu tema manualmente dentro del repo antes de ejecutar esta opcion:"
+        echo "    $PLYMOUTH_THEME_REPO"
+    fi
+
     echo
     warn "Plymouth requiere configuración MANUAL:"
     echo "  1. Edita /etc/mkinitcpio.conf y en la línea HOOKS=(...)"
     echo "     agrega 'plymouth' justo después de 'udev':"
     echo "       HOOKS=(base udev plymouth autodetect ...)"
     echo
-    echo "  2. Ejecuta: sudo mkinitcpio -P"
-    echo
-    echo "  3. Edita tu entry en /boot/loader/entries/*.conf"
-    echo "     y agrega al FINAL de la línea 'options':"
+    echo "  2. Si usas systemd-boot con UKI, edita /etc/kernel/cmdline"
+    echo "     y agrega al FINAL:"
     echo "       quiet splash"
     echo "     Ejemplo:"
-    echo "       options root=UUID=xxxx rw quiet splash"
+    echo "       root=PARTUUID=xxxx rw quiet splash"
+    echo
+    echo "  3. Regenera el initramfs/UKI:"
+    echo "       sudo mkinitcpio -P"
     echo
     echo "  4. Para ver temas disponibles: sudo plymouth-set-default-theme -l"
     echo "     Para aplicar uno:           sudo plymouth-set-default-theme -R TEMA"
     echo
 fi
 
-# ── 9. Tema SDDM astronaut ───────────────────────────────────
-if ask "¿Instalar tema SDDM astronaut?"; then
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/keyitdev/sddm-astronaut-theme/master/setup.sh)"
-    # Aplicar configuración de tema y teclado virtual
-    sudo cp "$DOTFILES/sddm/sddm.conf" /etc/sddm.conf
-    sudo mkdir -p /etc/sddm.conf.d
-    sudo cp "$DOTFILES/sddm/sddm.conf.d/virtualkbd.conf" /etc/sddm.conf.d/virtualkbd.conf
-    ok "Tema SDDM instalado y configurado"
-fi
-
-# ── 10. LibreOffice ──────────────────────────────────────────
+# ── 9. LibreOffice ───────────────────────────────────────────
 if ask "¿Instalar LibreOffice en español?"; then
     sudo pacman -S --needed --noconfirm \
         libreoffice-fresh libreoffice-fresh-es hunspell-es_es
     ok "LibreOffice instalado"
 fi
 
-# ── 11. Wine / Gaming ────────────────────────────────────────
+# ── 10. Wine / Gaming ────────────────────────────────────────
 if ask "¿Instalar Wine + gamemode?"; then
     yay -S --needed --noconfirm \
         wine winetricks wine-gecko wine-mono \
@@ -220,21 +231,24 @@ if ask "¿Instalar Wine + gamemode?"; then
     ok "Wine + gamemode instalados"
 fi
 
-# ── 12. RGB Predator Helios 300 ──────────────────────────────
-if ask "¿Instalar control RGB del teclado (Predator Helios 300)?"; then
-    sudo pacman -S --needed --noconfirm linux-headers gcc make dkms
+# ── 11. Predator Sense / RGB ────────────────────────────────
+if ask "¿Instalar Predator Sense (RGB, tecla Predator, ventiladores y perfiles)?"; then
+    warn "Se usará el instalador no oficial de cleyton1986/predator-sense."
+    warn "Instala módulo DKMS y servicios para controlar hardware Acer Predator."
     tmp=$(mktemp -d)
-    git clone https://github.com/jefersonEspinoza29/acer-predator-turbo-rgb-linux "$tmp/rgb"
-    (cd "$tmp/rgb" && chmod +x ./*.sh && sudo ./install_service.sh)
-    rm -rf "$tmp"
-    # Aplicar efecto Wave por defecto al arranque
-    echo "" | sudo tee -a /opt/turbo-fan/service.sh > /dev/null
-    echo "python /opt/turbo-fan/facer_rgb.py -m 3 -s 3 -b 100" | sudo tee -a /opt/turbo-fan/service.sh > /dev/null
-    sudo systemctl restart turbo-fan
-    ok "RGB instalado en /opt/turbo-fan/ — Wave activo por defecto"
+    ps_installer="$tmp/predator-sense-install.sh"
+    if curl -fsSL \
+        https://raw.githubusercontent.com/cleyton1986/predator-sense/main/scripts/remote-install.sh \
+        -o "$ps_installer" && sudo bash "$ps_installer"; then
+        rm -rf "$tmp"
+        ok "Predator Sense instalado. Ábrelo desde el menú o con la tecla Predator."
+    else
+        rm -rf "$tmp"
+        err "No se pudo instalar Predator Sense"
+    fi
 fi
 
-# ── 13. Copiar configuraciones ───────────────────────────────
+# ── 12. Copiar configuraciones ───────────────────────────────
 info "Copiando configuraciones a ~/.config..."
 CONFIG_DIRS=(hypr waybar wofi wlogout matugen kitty eww swaync)
 for dir in "${CONFIG_DIRS[@]}"; do
@@ -250,24 +264,24 @@ chmod +x ~/.config/hypr/scripts/*.sh 2>/dev/null || true
 chmod +x ~/.config/eww/scripts/*.sh  2>/dev/null || true
 chmod +x ~/.config/wlogout/colorize.py            || true
 
-# ── 14. Shell config ─────────────────────────────────────────
+# ── 13. Shell config ─────────────────────────────────────────
 if [ -f "$DOTFILES/.bashrc" ]; then
     cp "$DOTFILES/.bashrc" "$HOME/.bashrc"
     ok "~/.bashrc"
 fi
 
-# ── 15. Directorios de usuario ───────────────────────────────
+# ── 14. Directorios de usuario ───────────────────────────────
 mkdir -p "$HOME/Imagenes/Capturas"
 ok "~/Imagenes/Capturas"
 
-# ── 17. Wallpapers ──────────────────────────────────────────
+# ── 15. Wallpapers ──────────────────────────────────────────
 if [ -d "$DOTFILES/wallpapers" ]; then
     mkdir -p "$HOME/Wallpapers"
     cp -r "$DOTFILES/wallpapers/." "$HOME/Wallpapers/"
     ok "Wallpapers copiados a ~/Wallpapers"
 fi
 
-# ── 18. Generar colores con matugen ──────────────────────────
+# ── 16. Generar colores con matugen ──────────────────────────
 FIRST_WALL=$(find "$HOME/Wallpapers" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) 2>/dev/null | head -1)
 if [[ -n "${FIRST_WALL:-}" ]]; then
     info "Generando colores iniciales con matugen..."
@@ -275,11 +289,29 @@ if [[ -n "${FIRST_WALL:-}" ]]; then
     ok "Colores generados"
 fi
 
-# ── 19. Habilitar SDDM ───────────────────────────────────────
+# ── 17. Habilitar SDDM ───────────────────────────────────────
 if ask "¿Habilitar SDDM al inicio del sistema?"; then
     sudo systemctl enable sddm
     sudo systemctl set-default graphical.target
     ok "SDDM habilitado"
+fi
+
+# ── 18. Tema SDDM astronaut ──────────────────────────────────
+if ask "¿Instalar tema SDDM astronaut al final?"; then
+    tmp=$(mktemp -d)
+    sddm_installer="$tmp/sddm-astronaut-install.sh"
+    if curl -fsSL \
+        https://raw.githubusercontent.com/keyitdev/sddm-astronaut-theme/master/setup.sh \
+        -o "$sddm_installer" && bash "$sddm_installer"; then
+        sudo cp "$DOTFILES/sddm/sddm.conf" /etc/sddm.conf
+        sudo mkdir -p /etc/sddm.conf.d
+        sudo cp "$DOTFILES/sddm/sddm.conf.d/virtualkbd.conf" /etc/sddm.conf.d/virtualkbd.conf
+        rm -rf "$tmp"
+        ok "Tema SDDM astronaut instalado y configurado"
+    else
+        rm -rf "$tmp"
+        err "No se pudo instalar el tema SDDM astronaut"
+    fi
 fi
 
 # ── Fin ──────────────────────────────────────────────────────

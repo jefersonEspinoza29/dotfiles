@@ -24,6 +24,7 @@ Setup minimalista con tema dinámico generado automáticamente desde el wallpape
 | Música | Gapless |
 | Login manager | SDDM (tema astronaut) |
 | Control de energía CPU | auto-cpufreq |
+| Control laptop Predator | Predator Sense |
 
 ---
 
@@ -44,7 +45,7 @@ chmod +x install.sh
 ./install.sh
 ```
 
-El script pregunta por cada componente opcional: drivers Intel, drivers NVIDIA, Plymouth, tema SDDM, LibreOffice, Wine, RGB del teclado.
+El script pregunta por cada componente opcional: drivers Intel, drivers NVIDIA, Plymouth con el tema `supramk4-jheff`, LibreOffice, Wine, Predator Sense para RGB/tecla Predator/ventiladores y, al final, el tema SDDM astronaut.
 
 ### Después de instalar
 
@@ -56,7 +57,7 @@ El script pregunta por cada componente opcional: drivers Intel, drivers NVIDIA, 
 
 ## Configuración manual (post-instalación)
 
-Estas configuraciones **no se automatizan** porque tocan el sistema de arranque y un error puede dejar el sistema sin arrancar.
+Algunas configuraciones quedan **manuales** porque tocan el sistema de arranque y un error puede dejar el sistema sin arrancar.
 
 ### NVIDIA
 
@@ -82,25 +83,47 @@ prime-run <aplicación>
 
 ### Plymouth (splash de arranque)
 
+El instalador intenta aplicar el tema `supramk4-jheff` si ya existe dentro del repo en:
+
+```bash
+plymouth/supramk4-jheff
+```
+
+Si tienes el tema guardado en otro disco, cópialo manualmente antes de ejecutar el instalador:
+
+```bash
+cd ~/dotfiles
+mkdir -p plymouth
+cp -a /ruta/donde/tengas/supramk4-jheff plymouth/
+```
+
+Lo que todavía queda manual es activar Plymouth en el arranque.
+
 Edita `/etc/mkinitcpio.conf` — agrega `plymouth` justo después de `udev` en HOOKS:
 ```
 HOOKS=(base udev plymouth autodetect ...)
 ```
 
-Edita tu entry en `/boot/loader/entries/*.conf` — agrega al final de la línea `options`:
+Si usas `systemd-boot` con UKI, puede que `/boot/loader/entries/` esté vacío. En ese caso edita `/etc/kernel/cmdline` y agrega al final:
+
 ```
 quiet splash
 ```
 
-Regenera los initramfs:
+Regenera el initramfs/UKI:
 ```bash
 sudo mkinitcpio -P
+```
+
+Verifica la línea de arranque:
+```bash
+bootctl status
 ```
 
 Ver y aplicar temas:
 ```bash
 sudo plymouth-set-default-theme -l         # listar temas
-sudo plymouth-set-default-theme -R TEMA    # aplicar tema
+sudo plymouth-set-default-theme -R supramk4-jheff
 ```
 
 ---
@@ -145,28 +168,14 @@ El script `~/.config/wlogout/colorize.py` se ejecuta automáticamente como post-
 
 ---
 
-## Control RGB — Predator Helios 300
+## Predator Sense — RGB / tecla Predator / ventiladores
+
+El instalador puede instalar [Predator Sense for Linux](https://github.com/cleyton1986/predator-sense), que agrega la app gráfica, el módulo DKMS, reglas udev y el servicio para abrirla con la tecla Predator.
+
+Después de instalarlo puedes abrirlo desde:
 
 ```bash
-# Wave
-python /opt/turbo-fan/facer_rgb.py -m 3 -s 5 -b 100
-
-# Breath (color personalizado)
-python /opt/turbo-fan/facer_rgb.py -m 1 -s 4 -b 100 -cR 255 -cG 0 -cB 255
-
-# Neon
-python /opt/turbo-fan/facer_rgb.py -m 2 -s 3 -b 100
-
-# Shifting
-python /opt/turbo-fan/facer_rgb.py -m 4 -s 5 -b 100 -cR 0 -cB 255 -cG 0
-
-# Estático por zona (1=izq, 2, 3, 4=der)
-python /opt/turbo-fan/facer_rgb.py -m 0 -z 1 -cR 255 -cG 0 -cB 0
-
-# Apagar
-python /opt/turbo-fan/facer_rgb.py -m 0 -b 0
-
-# Guardar/cargar perfil
-python /opt/turbo-fan/facer_rgb.py -m 3 -s 2 -b 100 -save perfil
-python /opt/turbo-fan/facer_rgb.py -load perfil
+/opt/predator-sense/predator-sense
 ```
+
+También aparece en el menú de aplicaciones como **Predator Sense**.
