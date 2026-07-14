@@ -5,6 +5,7 @@ config/wlogout/icons_default/
 config/kitty/colors.conf
 config/hypr/modules/colors.conf
 config/waybar/style.css
+config/wofi/style.css
 config/gtk-3.0/gtk.css
 config/gtk-4.0/gtk.css
 config/eww/eww.scss

@@ -1,0 +1,66 @@
+window {
+  margin: 0;
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.22);
+  border-radius: 18px;
+  background-color: rgba({{colors.surface_container_lowest.dark.red}}, {{colors.surface_container_lowest.dark.green}}, {{colors.surface_container_lowest.dark.blue}}, 0.96);
+  font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
+}
+
+#outer-box {
+  margin: 16px;
+  border: none;
+  background-color: transparent;
+}
+
+#input {
+  margin: 0 0 14px 0;
+  padding: 11px 14px;
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.18);
+  border-radius: 12px;
+  color: {{colors.on_surface.dark.hex}};
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.38);
+  font-size: 14px;
+}
+
+#input:focus {
+  border-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.45);
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.50);
+}
+
+#inner-box,
+#scroll {
+  margin: 0;
+  border: none;
+  background-color: transparent;
+}
+
+#entry {
+  min-width: 150px;
+  min-height: 92px;
+  margin: 6px;
+  padding: 12px 10px;
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.10);
+  border-radius: 14px;
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.20);
+}
+
+#entry:selected {
+  border-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.46);
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.14);
+}
+
+#img {
+  margin: 0 10px 0 0;
+}
+
+#text {
+  margin: 0;
+  border: none;
+  color: {{colors.on_surface_variant.dark.hex}};
+  font-size: 12px;
+  font-weight: 600;
+}
+
+#text:selected {
+  color: {{colors.on_surface.dark.hex}};
+}

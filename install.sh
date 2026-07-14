@@ -236,7 +236,7 @@ fi
 
 # ── 13. Copiar configuraciones ───────────────────────────────
 info "Copiando configuraciones a ~/.config..."
-CONFIG_DIRS=(hypr waybar wlogout matugen kitty eww swaync)
+CONFIG_DIRS=(hypr waybar wofi wlogout matugen kitty eww swaync)
 for dir in "${CONFIG_DIRS[@]}"; do
     if [ -d "$DOTFILES/config/$dir" ]; then
         mkdir -p "$HOME/.config/$dir"

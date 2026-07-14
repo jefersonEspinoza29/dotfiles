@@ -7,6 +7,10 @@ input_path = "~/.config/matugen/templates/waybar.css"
 output_path = "~/.config/waybar/style.css"
 post_hook = "pkill -SIGUSR2 waybar"
 
+[templates.wofi]
+input_path = "~/.config/matugen/templates/wofi.css"
+output_path = "~/.config/wofi/style.css"
+
 [templates.eww]
 input_path = "~/.config/matugen/templates/eww.scss"
 output_path = "~/.config/eww/eww.scss"

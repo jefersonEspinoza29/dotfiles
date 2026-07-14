@@ -1,0 +1,14 @@
+show=drun
+prompt=Buscar apps
+width=760
+height=560
+columns=4
+lines=4
+allow_images=true
+image_size=56
+hide_scroll=true
+gtk_dark=true
+insensitive=true
+matching=fuzzy
+line_wrap=word_char
+no_actions=true
