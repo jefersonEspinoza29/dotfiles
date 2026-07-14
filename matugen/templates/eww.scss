@@ -1,0 +1,877 @@
+/* Fondo transparente en todas las ventanas eww */
+window {
+  background-color: transparent;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ==================
+   OSD
+   ================== */
+.osd-container {
+  background-color: rgba({{colors.surface_container_lowest.dark.red}}, {{colors.surface_container_lowest.dark.green}}, {{colors.surface_container_lowest.dark.blue}}, 0.90);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.20);
+  border-radius: 20px;
+  padding: 10px 22px;
+}
+
+.osd-icon {
+  font-size: 20px;
+  color: {{colors.primary.dark.hex}};
+  min-width: 26px;
+}
+
+.osd-label {
+  font-size: 12px;
+  color: {{colors.on_surface.dark.hex}};
+  min-width: 40px;
+}
+
+scale.osd-scale trough {
+  border-radius: 8px;
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.70);
+  min-height: 6px;
+  min-width: 170px;
+}
+
+scale.osd-scale trough highlight {
+  background-color: {{colors.primary.dark.hex}};
+  border-radius: 8px;
+}
+
+scale.osd-scale slider {
+  min-width: 0;
+  min-height: 0;
+}
+
+/* ==================
+   Widget de calendario
+   ================== */
+.cal-box {
+  background-color: rgba({{colors.surface_container_lowest.dark.red}}, {{colors.surface_container_lowest.dark.green}}, {{colors.surface_container_lowest.dark.blue}}, 0.94);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.22);
+  border-radius: 18px;
+  padding: 14px;
+}
+
+.cal-header-icon {
+  font-size: 20px;
+  color: {{colors.primary.dark.hex}};
+  min-width: 24px;
+}
+
+.cal-header-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: {{colors.on_surface.dark.hex}};
+}
+
+.cal-separator {
+  min-height: 1px;
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+  border-radius: 1px;
+}
+
+.cal-weekdays {
+  min-width: 252px;
+}
+
+.cal-weekday {
+  font-size: 11px;
+  font-weight: bold;
+  color: {{colors.outline.dark.hex}};
+  min-width: 30px;
+}
+
+.cal-grid {
+  min-width: 252px;
+}
+
+.cal-day {
+  font-size: 12px;
+  color: {{colors.on_surface_variant.dark.hex}};
+  min-width: 30px;
+  min-height: 28px;
+  border-radius: 8px;
+}
+
+.cal-day-empty {
+  color: transparent;
+}
+
+.cal-today {
+  color: {{colors.on_primary.dark.hex}};
+  background-color: {{colors.primary.dark.hex}};
+  font-weight: bold;
+}
+
+.cal-empty {
+  font-size: 12px;
+  color: {{colors.outline_variant.dark.hex}};
+}
+
+.cal-overlay-btn {
+  background: transparent;
+  min-width: 1920px;
+  min-height: 1080px;
+}
+
+.cal-year-box {
+  padding: 16px 18px;
+}
+
+.cal-year-month {
+  min-width: 192px;
+  padding: 9px;
+  border-radius: 12px;
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.22);
+}
+
+.cal-year-month-title {
+  font-size: 12px;
+  font-weight: bold;
+  color: {{colors.primary.dark.hex}};
+}
+
+.cal-year-weekday {
+  font-size: 10px;
+  font-weight: bold;
+  color: {{colors.outline.dark.hex}};
+  min-width: 22px;
+}
+
+.cal-year-day {
+  font-size: 11px;
+  color: {{colors.on_surface_variant.dark.hex}};
+  min-width: 22px;
+  min-height: 21px;
+  border-radius: 6px;
+}
+
+.cal-year-day.cal-today {
+  color: #000000;
+  font-size: 11px;
+}
+
+/* ==================
+   Widget de WiFi
+   ================== */
+.wifi-box {
+  background-color: rgba({{colors.surface_container_lowest.dark.red}}, {{colors.surface_container_lowest.dark.green}}, {{colors.surface_container_lowest.dark.blue}}, 0.92);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.20);
+  border-radius: 18px;
+  padding: 14px;
+}
+
+.wifi-header-icon {
+  font-size: 20px;
+  color: {{colors.primary.dark.hex}};
+  min-width: 24px;
+}
+
+.wifi-header-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: {{colors.on_surface.dark.hex}};
+}
+
+.wifi-power-btn {
+  min-width: 40px;
+  min-height: 10px;
+  border-radius: 999px;
+  padding: 2px;
+  transition: all 0.16s ease;
+}
+
+.wifi-power-btn:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+}
+
+.wifi-power-on {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.34);
+}
+
+.wifi-power-off {
+  background-color: rgba({{colors.outline_variant.dark.red}}, {{colors.outline_variant.dark.green}}, {{colors.outline_variant.dark.blue}}, 0.70);
+}
+
+.wifi-power-btn .power-switch-knob {
+  color: {{colors.on_surface.dark.hex}};
+  font-size: 14px;
+}
+
+.wifi-separator {
+  min-height: 1px;
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+  border-radius: 1px;
+}
+
+.wifi-no-networks {
+  font-size: 12px;
+  color: {{colors.outline_variant.dark.hex}};
+  padding: 6px 0;
+}
+
+.wifi-network-row {
+  padding: 6px 4px;
+  border-radius: 10px;
+}
+
+.wifi-network-row:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.07);
+}
+
+.wifi-network-connected .wifi-network-name {
+  color: {{colors.primary.dark.hex}};
+}
+
+.wifi-signal-icon {
+  font-size: 16px;
+  color: {{colors.primary.dark.hex}};
+  min-width: 20px;
+}
+
+.wifi-network-name {
+  font-size: 12px;
+  color: {{colors.on_surface_variant.dark.hex}};
+}
+
+.wifi-lock-icon {
+  font-size: 11px;
+  color: {{colors.outline.dark.hex}};
+  min-width: 14px;
+}
+
+.wifi-btn {
+  font-size: 15px;
+  border-radius: 8px;
+  padding: 3px 6px;
+  color: {{colors.outline.dark.hex}};
+}
+
+.wifi-btn:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+  color: {{colors.on_surface.dark.hex}};
+}
+
+.wifi-btn-connect {
+  color: {{colors.primary.dark.hex}};
+}
+
+.wifi-btn-connect:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+  color: {{colors.primary.dark.hex}};
+}
+
+.wifi-btn-disconnect {
+  color: {{colors.secondary.dark.hex}};
+}
+
+.wifi-btn-disconnect:hover {
+  background-color: rgba({{colors.secondary.dark.red}}, {{colors.secondary.dark.green}}, {{colors.secondary.dark.blue}}, 0.12);
+  color: {{colors.secondary.dark.hex}};
+}
+
+.wifi-manager-btn {
+  font-size: 12px;
+  color: {{colors.outline.dark.hex}};
+  border-radius: 10px;
+  padding: 6px 10px;
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+}
+
+.wifi-manager-btn:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.10);
+  color: {{colors.primary.dark.hex}};
+  border-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.25);
+}
+
+.wifi-overlay-btn {
+  background: transparent;
+  min-width: 1920px;
+  min-height: 1032px;
+}
+
+/* ==================
+   WiFi - popup password
+   ================== */
+.wifi-pass-box {
+  background-color: rgba({{colors.surface_container_lowest.dark.red}}, {{colors.surface_container_lowest.dark.green}}, {{colors.surface_container_lowest.dark.blue}}, 0.96);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.22);
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+
+.wifi-pass-ssid {
+  font-size: 13px;
+  font-weight: bold;
+  color: {{colors.primary.dark.hex}};
+}
+
+entry.wifi-pass-input {
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.40);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.22);
+  border-radius: 8px;
+  color: {{colors.on_surface.dark.hex}};
+  padding: 6px 10px;
+  font-size: 13px;
+  min-height: 0;
+}
+
+entry.wifi-pass-input:focus {
+  border-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.55);
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.60);
+}
+
+.wifi-pass-error {
+  font-size: 11px;
+  color: {{colors.error.dark.hex}};
+}
+
+.wifi-pass-status {
+  font-size: 11px;
+  color: {{colors.on_surface_variant.dark.hex}};
+}
+
+button.wifi-pass-eye {
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.40);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.22);
+  border-radius: 8px;
+  color: {{colors.on_surface_variant.dark.hex}};
+  padding: 0 8px;
+  font-size: 14px;
+  min-height: 0;
+  min-width: 0;
+}
+
+button.wifi-pass-eye:hover {
+  color: {{colors.primary.dark.hex}};
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.70);
+}
+
+.wifi-pass-buttons {
+  margin-top: 4px;
+}
+
+button.wifi-pass-btn {
+  border-radius: 8px;
+  padding: 5px 0;
+  font-size: 12px;
+  font-weight: bold;
+  border: 1px solid transparent;
+  min-height: 0;
+}
+
+button.wifi-pass-cancel {
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.50);
+  color: {{colors.on_surface_variant.dark.hex}};
+  border-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.15);
+}
+
+button.wifi-pass-cancel:hover {
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.80);
+  color: {{colors.on_surface.dark.hex}};
+}
+
+button.wifi-pass-accept {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.25);
+  color: {{colors.primary.dark.hex}};
+  border-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.35);
+}
+
+button.wifi-pass-accept:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.45);
+  color: {{colors.on_primary.dark.hex}};
+}
+
+/* ==================
+   Widget de audio
+   ================== */
+.audio-box {
+  background-color: rgba({{colors.surface_container_lowest.dark.red}}, {{colors.surface_container_lowest.dark.green}}, {{colors.surface_container_lowest.dark.blue}}, 0.92);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.20);
+  border-radius: 18px;
+  padding: 14px;
+}
+
+.audio-header-icon {
+  font-size: 20px;
+  color: {{colors.primary.dark.hex}};
+  min-width: 24px;
+}
+
+.audio-header-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: {{colors.on_surface.dark.hex}};
+}
+
+.audio-header-btn {
+  font-size: 15px;
+  color: {{colors.outline.dark.hex}};
+  border-radius: 8px;
+  padding: 3px 7px;
+}
+
+.audio-header-btn:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+  color: {{colors.on_surface.dark.hex}};
+}
+
+.audio-section-title {
+  font-size: 11px;
+  font-weight: bold;
+  color: {{colors.outline.dark.hex}};
+  padding: 2px 2px 0;
+}
+
+.audio-separator {
+  min-height: 1px;
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+  border-radius: 1px;
+}
+
+.audio-device-row {
+  padding: 6px 4px;
+  border-radius: 10px;
+}
+
+.audio-device-row:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.07);
+}
+
+.audio-device-active {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.10);
+}
+
+.audio-device-icon {
+  font-size: 16px;
+  color: {{colors.primary.dark.hex}};
+  min-width: 20px;
+}
+
+.audio-device-name {
+  font-size: 12px;
+  color: {{colors.on_surface_variant.dark.hex}};
+}
+
+.audio-device-active .audio-device-name {
+  color: {{colors.primary.dark.hex}};
+  font-weight: bold;
+}
+
+.audio-device-check {
+  font-size: 14px;
+  color: {{colors.primary.dark.hex}};
+  min-width: 18px;
+}
+
+.audio-empty {
+  font-size: 12px;
+  color: {{colors.outline_variant.dark.hex}};
+  padding: 6px 0;
+}
+
+.audio-manager-btn {
+  font-size: 12px;
+  color: {{colors.outline.dark.hex}};
+  border-radius: 10px;
+  padding: 6px 10px;
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+}
+
+.audio-manager-btn:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.10);
+  color: {{colors.primary.dark.hex}};
+  border-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.25);
+}
+
+.audio-overlay-btn {
+  background: transparent;
+  min-width: 1920px;
+  min-height: 1032px;
+}
+
+/* ==================
+   Widget de musica
+   ================== */
+.music-box {
+  background-color: rgba({{colors.surface_container_lowest.dark.red}}, {{colors.surface_container_lowest.dark.green}}, {{colors.surface_container_lowest.dark.blue}}, 0.88);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.18);
+  border-radius: 18px;
+  padding: 14px;
+}
+
+.music-art-box {
+  min-width: 72px;
+  min-height: 72px;
+  border-radius: 10px;
+  background-color: rgba({{colors.surface_container_low.dark.red}}, {{colors.surface_container_low.dark.green}}, {{colors.surface_container_low.dark.blue}}, 0.90);
+  background-size: cover;
+  background-position: center;
+}
+
+.music-art-placeholder {
+  font-size: 32px;
+  color: {{colors.surface_variant.dark.hex}};
+  min-width: 72px;
+  min-height: 72px;
+}
+
+.music-source {
+  font-size: 11px;
+  color: {{colors.primary.dark.hex}};
+  min-width: 16px;
+}
+
+.music-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: {{colors.on_surface.dark.hex}};
+}
+
+.music-artist {
+  font-size: 11px;
+  
+  color: {{colors.outline.dark.hex}};
+}
+
+scale.music-progress-bar trough {
+  border-radius: 6px;
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.60);
+  min-height: 4px;
+}
+
+scale.music-progress-bar trough highlight {
+  background-color: {{colors.primary.dark.hex}};
+  border-radius: 6px;
+}
+
+scale.music-progress-bar slider {
+  min-width: 0;
+  min-height: 0;
+}
+
+.music-time {
+  font-size: 10px;
+  color: {{colors.outline.dark.hex}};
+}
+
+.music-btn {
+  font-size: 16px;
+  color: {{colors.on_surface_variant.dark.hex}};
+  border-radius: 8px;
+  padding: 3px 6px;
+}
+
+.music-btn:hover {
+  color: {{colors.on_surface.dark.hex}};
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+}
+
+.music-btn-play {
+  font-size: 20px;
+  color: {{colors.primary.dark.hex}};
+}
+
+/* Barritas ecualizador (cava) */
+.music-bars {
+  min-height: 50px;
+}
+
+scale.cava-bar {
+  min-width: 8px;
+}
+
+scale.cava-bar trough {
+  min-width: 8px;
+  min-height: 50px;
+  border-radius: 4px;
+  background-color: {{colors.surface_variant.dark.hex}};
+}
+
+scale.cava-bar trough highlight {
+  background-color: {{colors.primary.dark.hex}};
+  border-radius: 4px;
+  min-width: 8px;
+}
+
+scale.cava-bar slider {
+  min-width: 0;
+  min-height: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+/* ==================
+   Widget de Bluetooth
+   ================== */
+.bt-box {
+  background-color: rgba({{colors.surface_container_lowest.dark.red}}, {{colors.surface_container_lowest.dark.green}}, {{colors.surface_container_lowest.dark.blue}}, 0.92);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.20);
+  border-radius: 18px;
+  padding: 14px;
+}
+
+.bt-header-icon {
+  font-size: 20px;
+  color: {{colors.primary.dark.hex}};
+  min-width: 24px;
+}
+
+.bt-header-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: {{colors.on_surface.dark.hex}};
+}
+
+.bt-power-btn {
+  min-width: 40px;
+  min-height: 10px;
+  border-radius: 999px;
+  padding: 2px;
+  transition: all 0.16s ease;
+}
+
+.bt-power-btn:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+}
+
+.bt-power-on {
+  background-color: rgba({{colors.tertiary.dark.red}}, {{colors.tertiary.dark.green}}, {{colors.tertiary.dark.blue}}, 0.34);
+}
+
+.bt-power-off {
+  background-color: rgba({{colors.outline_variant.dark.red}}, {{colors.outline_variant.dark.green}}, {{colors.outline_variant.dark.blue}}, 0.70);
+}
+
+.bt-power-btn .power-switch-knob {
+  color: {{colors.on_surface.dark.hex}};
+  font-size: 14px;
+}
+
+.bt-separator {
+  min-height: 1px;
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+  border-radius: 1px;
+}
+
+.bt-no-devices {
+  font-size: 12px;
+  color: {{colors.outline_variant.dark.hex}};
+  padding: 6px 0;
+}
+
+.bt-device-row {
+  padding: 6px 4px;
+  border-radius: 10px;
+}
+
+.bt-device-row:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.07);
+}
+
+.bt-device-icon {
+  font-size: 16px;
+  color: {{colors.primary.dark.hex}};
+  min-width: 20px;
+}
+
+.bt-device-name {
+  font-size: 12px;
+  color: {{colors.on_surface_variant.dark.hex}};
+}
+
+.bt-btn {
+  font-size: 15px;
+  border-radius: 8px;
+  padding: 3px 6px;
+  color: {{colors.outline.dark.hex}};
+}
+
+.bt-btn:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+  color: {{colors.on_surface.dark.hex}};
+}
+
+.bt-btn-connect {
+  color: {{colors.tertiary.dark.hex}};
+}
+
+.bt-btn-connect:hover {
+  background-color: rgba({{colors.tertiary.dark.red}}, {{colors.tertiary.dark.green}}, {{colors.tertiary.dark.blue}}, 0.12);
+  color: {{colors.tertiary.dark.hex}};
+}
+
+.bt-btn-disconnect {
+  color: {{colors.secondary.dark.hex}};
+}
+
+.bt-btn-disconnect:hover {
+  background-color: rgba({{colors.secondary.dark.red}}, {{colors.secondary.dark.green}}, {{colors.secondary.dark.blue}}, 0.12);
+  color: {{colors.secondary.dark.hex}};
+}
+
+.bt-btn-remove {
+  color: {{colors.outline.dark.hex}};
+}
+
+.bt-btn-remove:hover {
+  background-color: rgba({{colors.error.dark.red}}, {{colors.error.dark.green}}, {{colors.error.dark.blue}}, 0.12);
+  color: {{colors.error.dark.hex}};
+}
+
+.bt-manager-btn {
+  font-size: 12px;
+  color: {{colors.outline.dark.hex}};
+  border-radius: 10px;
+  padding: 6px 10px;
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+}
+
+.bt-manager-btn:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.10);
+  color: {{colors.primary.dark.hex}};
+  border-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.25);
+}
+
+.bt-overlay-btn {
+  background: transparent;
+  min-width: 1920px;
+  min-height: 1032px;
+}
+
+/* ==================
+   Widget de sistema
+   ================== */
+.sys-box {
+  background-color: rgba({{colors.surface_container_lowest.dark.red}}, {{colors.surface_container_lowest.dark.green}}, {{colors.surface_container_lowest.dark.blue}}, 0.94);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.22);
+  border-radius: 18px;
+  padding: 14px;
+}
+
+.sys-header {
+  padding: 0 2px 2px;
+}
+
+.sys-header-icon {
+  font-size: 20px;
+  color: {{colors.primary.dark.hex}};
+  min-width: 24px;
+}
+
+.sys-header-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: {{colors.on_surface.dark.hex}};
+}
+
+.sys-header-chip {
+  font-size: 10px;
+  color: {{colors.primary.dark.hex}};
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.16);
+  border-radius: 999px;
+  padding: 3px 8px;
+}
+
+.sys-rings {
+  margin-top: 2px;
+}
+
+.sys-ring-card {
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 6px 14px 4px;
+}
+
+circular-progress.cpu-ring {
+  color: {{colors.primary.dark.hex}};
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.44);
+  min-width: 104px;
+  min-height: 104px;
+}
+
+circular-progress.ram-ring {
+  color: {{colors.tertiary.dark.hex}};
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.44);
+  min-width: 104px;
+  min-height: 104px;
+}
+
+.sys-ring-inner {
+  min-width: 92px;
+  min-height: 92px;
+}
+
+.sys-percent {
+  font-size: 18px;
+  font-weight: bold;
+  color: {{colors.on_surface.dark.hex}};
+  margin-top: 36px;
+}
+
+.sys-label {
+  font-size: 12px;
+  font-weight: bold;
+  color: {{colors.on_surface.dark.hex}};
+}
+
+.sys-sublabel {
+  font-size: 11px;
+  color: {{colors.outline.dark.hex}};
+}
+
+.sys-separator {
+  min-height: 1px;
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+  border-radius: 1px;
+}
+
+.temp-list {
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.12);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.08);
+  border-radius: 14px;
+  padding: 8px;
+}
+
+.temp-row {
+  background-color: rgba({{colors.surface_container_lowest.dark.red}}, {{colors.surface_container_lowest.dark.green}}, {{colors.surface_container_lowest.dark.blue}}, 0.34);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.08);
+  border-radius: 10px;
+  padding: 7px 9px;
+}
+
+.temp-icon {
+  font-size: 14px;
+  color: {{colors.primary.dark.hex}};
+  min-width: 20px;
+}
+
+.temp-name {
+  font-size: 12px;
+  color: {{colors.on_surface_variant.dark.hex}};
+}
+
+.temp-value {
+  font-size: 12px;
+  font-weight: bold;
+  color: {{colors.on_surface.dark.hex}};
+  min-width: 44px;
+}
+
+.temp-empty {
+  font-size: 12px;
+  color: {{colors.outline.dark.hex}};
+  padding: 8px;
+}
