@@ -1,14 +1,14 @@
 :root {
-    --bg:           rgba(12, 14, 19, 0.96);
-    --surface:      rgba(25, 28, 32, 0.95);
-    --hover:        rgba(67, 71, 78, 0.95);
-    --border:       rgba(166, 200, 255, 0.08);
-    --accent:       #a6c8ff;
-    --accent-glow:  rgba(166, 200, 255, 0.30);
-    --accent-dim:   rgba(166, 200, 255, 0.12);
-    --text:         #e1e2e9;
-    --text-sub:     #c3c6cf;
-    --text-dim:     #8d9199;
+    --bg:           rgba(15, 13, 19, 0.96);
+    --surface:      rgba(28, 27, 32, 0.95);
+    --hover:        rgba(72, 69, 78, 0.95);
+    --border:       rgba(205, 189, 255, 0.08);
+    --accent:       #cdbdff;
+    --accent-glow:  rgba(205, 189, 255, 0.30);
+    --accent-dim:   rgba(205, 189, 255, 0.12);
+    --text:         #e6e1e9;
+    --text-sub:     #cac4cf;
+    --text-dim:     #938f99;
     --error:        #ffb4ab;
     --radius:       12px;
     --radius-sm:    8px;
@@ -29,7 +29,7 @@ blankwindow {
 .control-center {
     background: var(--bg);
     border-radius: 16px;
-    border: 1px solid rgba(166, 200, 255, 0.12);
+    border: 1px solid rgba(205, 189, 255, 0.12);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
     padding: 10px;
 }
@@ -83,7 +83,7 @@ blankwindow {
 }
 
 .widget-dnd switch {
-    background: rgba(67, 71, 78, 0.6);
+    background: rgba(72, 69, 78, 0.6);
     border-radius: 20px;
     border: none;
     min-width: 36px;
@@ -91,7 +91,7 @@ blankwindow {
 }
 
 .widget-dnd switch:checked {
-    background: rgba(166, 200, 255, 0.5);
+    background: rgba(205, 189, 255, 0.5);
 }
 
 .widget-dnd switch slider {
@@ -120,7 +120,7 @@ blankwindow {
 }
 
 .widget-volume scale trough {
-    background: rgba(67, 71, 78, 0.5);
+    background: rgba(72, 69, 78, 0.5);
     border-radius: 10px;
     min-height: 4px;
 }
@@ -153,30 +153,30 @@ blankwindow {
 .widget-backlight label {
     font-family: "JetBrainsMono Nerd Font Mono", "JetBrainsMono NF", monospace;
     font-size: 14px;
-    color: #bcc7dc;
+    color: #cbc3dc;
     min-width: 22px;
     margin-right: 6px;
 }
 
 .widget-backlight scale trough {
-    background: rgba(67, 71, 78, 0.5);
+    background: rgba(72, 69, 78, 0.5);
     border-radius: 10px;
     min-height: 4px;
 }
 
 .widget-backlight scale highlight {
-    background: #bcc7dc;
+    background: #cbc3dc;
     border-radius: 10px;
     min-height: 4px;
 }
 
 .widget-backlight scale slider {
-    background: #bcc7dc;
+    background: #cbc3dc;
     border-radius: 50%;
     min-width: 14px;
     min-height: 14px;
     margin: -5px 0;
-    box-shadow: 0 0 6px rgba(166, 200, 255, 0.25);
+    box-shadow: 0 0 6px rgba(205, 189, 255, 0.25);
     border: none;
 }
 
@@ -196,7 +196,7 @@ blankwindow {
 
 .widget-mpris .widget-mpris-player .mpris-overlay {
     padding: 12px;
-    background: rgba(12, 14, 19, 0.6);
+    background: rgba(15, 13, 19, 0.6);
 }
 
 .widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-title {
@@ -328,7 +328,7 @@ blankwindow {
 
 /* ===== BOTONES DE ACCIÓN ===== */
 .notification-row .notification-background .notification .notification-alt-actions {
-    background: rgba(12, 14, 19, 0.5);
+    background: rgba(15, 13, 19, 0.5);
     border-top: 1px solid var(--border);
     border-bottom-left-radius: var(--radius);
     border-bottom-right-radius: var(--radius);
@@ -408,13 +408,13 @@ blankwindow {
 }
 
 .floating-notifications .notification-row .notification-background .notification {
-    background: rgba(12, 14, 19, 0.97);
+    background: rgba(15, 13, 19, 0.97);
     border: 1px solid var(--accent);
     box-shadow: 0 0 16px var(--accent-glow), 0 8px 28px rgba(0, 0, 0, 0.7);
 }
 
 .floating-notifications .notification-row .notification-background .notification .notification-default-action {
-    background: rgba(12, 14, 19, 0.97);
+    background: rgba(15, 13, 19, 0.97);
 }
 
 .floating-notifications .notification-row .notification-background .notification .notification-default-action:hover {

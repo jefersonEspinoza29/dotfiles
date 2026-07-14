@@ -31,6 +31,75 @@
     (label :class "osd-label" :text "${osd-value}%")))
 
 ; =====================
+; Widget de calendario
+; =====================
+(defpoll calendar-month
+  :interval "1h"
+  :initial "(label :class \"cal-empty\" :text \"Cargando calendario...\")"
+  `~/.config/eww/scripts/calendar-month.sh`)
+
+(defpoll calendar-year
+  :interval "1h"
+  :initial "(label :class \"cal-empty\" :text \"Cargando calendario...\")"
+  `~/.config/eww/scripts/calendar-year.sh`)
+
+; Overlay invisible — cierra el calendario mensual al hacer clic fuera
+(defwindow calendar-month-overlay
+  :monitor 0
+  :geometry (geometry
+    :x "0px"
+    :y "0px"
+    :width "100%"
+    :height "100%"
+    :anchor "top left")
+  :stacking "foreground"
+  :exclusive false
+  :focusable false
+  (button :class "cal-overlay-btn"
+          :onclick "eww close calendar-widget && eww close calendar-month-overlay"
+          ""))
+
+(defwindow calendar-widget
+  :monitor 0
+  :geometry (geometry
+    :x "0px"
+    :y "0px"
+    :width "300px"
+    :anchor "top center")
+  :stacking "overlay"
+  :exclusive false
+  :focusable false
+  (literal :content calendar-month))
+
+; Overlay invisible — cierra el calendario anual al hacer clic fuera
+(defwindow calendar-year-overlay
+  :monitor 0
+  :geometry (geometry
+    :x "0px"
+    :y "0px"
+    :width "100%"
+    :height "100%"
+    :anchor "top left")
+  :stacking "foreground"
+  :exclusive false
+  :focusable false
+  (button :class "cal-overlay-btn"
+          :onclick "eww close calendar-year-widget && eww close calendar-year-overlay"
+          ""))
+
+(defwindow calendar-year-widget
+  :monitor 0
+  :geometry (geometry
+    :x "0px"
+    :y "0px"
+    :width "860px"
+    :anchor "top center")
+  :stacking "overlay"
+  :exclusive false
+  :focusable false
+  (literal :content calendar-year))
+
+; =====================
 ; Widget de Bluetooth
 ; =====================
 (defpoll bt-power
@@ -91,7 +160,10 @@
              :halign "start")
       (button :class {bt-power == "on" ? "bt-power-btn bt-power-on" : "bt-power-btn bt-power-off"}
               :onclick "~/.config/eww/scripts/bt-power-toggle.sh"
-              {bt-power == "on" ? "󰔡" : "󰔣"}))
+        (label :class "power-switch-knob"
+               :text "●"
+               :hexpand true
+               :halign {bt-power == "on" ? "end" : "start"})))
     ; Separador
     (box :class "bt-separator" :hexpand true)
     ; Lista de dispositivos (contenido dinámico vía literal)
@@ -227,7 +299,10 @@
              :halign "start")
       (button :class {wifi-power == "on" ? "wifi-power-btn wifi-power-on" : "wifi-power-btn wifi-power-off"}
               :onclick "~/.config/eww/scripts/wifi-power-toggle.sh"
-              {wifi-power == "on" ? "󰔡" : "󰔣"}))
+        (label :class "power-switch-knob"
+               :text "●"
+               :hexpand true
+               :halign {wifi-power == "on" ? "end" : "start"})))
     ; Separador
     (box :class "wifi-separator" :hexpand true)
     ; Lista de redes (contenido dinámico vía literal)
@@ -236,6 +311,74 @@
     (button :class "wifi-manager-btn"
             :onclick "nm-connection-editor &"
             "󰤨  Gestor de Red")))
+
+; =====================
+; Widget de audio
+; =====================
+(defpoll audio-outputs
+  :interval "3s"
+  :initial "(label :class \"audio-empty\" :text \"Cargando salidas...\")"
+  `~/.config/eww/scripts/audio-devices.sh sinks`)
+
+(defpoll audio-inputs
+  :interval "3s"
+  :initial "(label :class \"audio-empty\" :text \"Cargando entradas...\")"
+  `~/.config/eww/scripts/audio-devices.sh sources`)
+
+; Overlay invisible — cierra el widget al hacer clic fuera
+(defwindow audio-overlay
+  :monitor 0
+  :geometry (geometry
+    :x "0px"
+    :y "48px"
+    :width "100%"
+    :height "1032px"
+    :anchor "top left")
+  :stacking "foreground"
+  :exclusive false
+  :focusable false
+  (button :class "audio-overlay-btn"
+          :onclick "eww close audio-widget && eww close audio-overlay"
+          ""))
+
+(defwindow audio-widget
+  :monitor 0
+  :geometry (geometry
+    :x "230px"
+    :y "0px"
+    :width "320px"
+    :anchor "top right")
+  :stacking "overlay"
+  :exclusive false
+  :focusable false
+  (audio-panel))
+
+(defwidget audio-panel []
+  (box :class "audio-box"
+       :orientation "v"
+       :space-evenly false
+       :spacing 10
+    (box :orientation "h"
+         :space-evenly false
+         :spacing 8
+      (label :class "audio-header-icon" :text "󰕾")
+      (label :class "audio-header-title"
+             :text "Sonido"
+             :hexpand true
+             :halign "start")
+      (button :class "audio-header-btn"
+              :tooltip "Silenciar salida"
+              :onclick "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+              "󰖁"))
+    (box :class "audio-separator" :hexpand true)
+    (label :class "audio-section-title" :text "Salida" :halign "start")
+    (literal :content audio-outputs)
+    (box :class "audio-separator" :hexpand true)
+    (label :class "audio-section-title" :text "Entrada" :halign "start")
+    (literal :content audio-inputs)
+    (button :class "audio-manager-btn"
+            :onclick "pavucontrol &"
+            "󰓃  Mezclador avanzado")))
 
 ; =====================
 ; Widget de musica
@@ -376,12 +519,17 @@
   :initial "0/0"
   `~/.config/eww/scripts/ram-info.sh`)
 
+(defpoll sensor-temps
+  :interval "3s"
+  :initial "(label :class \"temp-empty\" :text \"Leyendo sensores...\")"
+  `~/.config/eww/scripts/sensor-temps.sh`)
+
 (defwindow system-widget
   :monitor 0
   :geometry (geometry
     :x "20px"
     :y "300px"
-    :width "280px"
+    :width "350px"
     :anchor "top right")
   :stacking "bt"
   :exclusive false
@@ -390,30 +538,45 @@
 
 (defwidget system-stats []
   (box :class "sys-box"
-       :orientation "h"
-       :space-evenly true
-       :spacing 30
-    (sys-ring :icon "󰻠"
-              :label "CPU"
-              :value cpu-value
-              :ring-class "cpu-ring"
-              :color "#a6c8ff")
-    (sys-ring :icon "󰍛"
-              :label "RAM"
-              :value ram-value
-              :ring-class "ram-ring"
-              :color "#a6e3a1"
-              :sublabel ram-info)))
+       :orientation "v"
+       :space-evenly false
+       :spacing 12
+    (box :class "sys-header"
+         :orientation "h"
+         :space-evenly false
+         :spacing 8
+      (label :class "sys-header-icon" :text "󰍛")
+      (label :class "sys-header-title"
+             :text "Sistema"
+             :hexpand true
+             :halign "start")
+      (label :class "sys-header-chip" :text "Sensores"))
+    (box :class "sys-rings"
+         :orientation "h"
+         :space-evenly true
+         :spacing 12
+      (sys-ring :icon "󰻠"
+                :label "CPU"
+                :value cpu-value
+                :ring-class "cpu-ring"
+                :color "#a6c8ff")
+      (sys-ring :icon "󰍛"
+                :label "RAM"
+                :value ram-value
+                :ring-class "ram-ring"
+                :color "#a6e3a1"
+                :sublabel ram-info))
+    (box :class "sys-separator" :hexpand true)
+    (literal :content sensor-temps)))
 
 (defwidget sys-ring [icon label value ring-class color ?sublabel]
-  (box :orientation "v"
+  (box :class "sys-ring-card"
+       :orientation "v"
        :space-evenly false
-       :spacing 5
+       :spacing 4
        :halign "center"
     (circular-progress
       :value {value == "" ? 0 : value}
-      :min 0
-      :max 100
       :thickness 10
       :class ring-class
       (box :class "sys-ring-inner"

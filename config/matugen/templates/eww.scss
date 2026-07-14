@@ -51,6 +51,115 @@ scale.osd-scale slider {
 }
 
 /* ==================
+   Widget de calendario
+   ================== */
+.cal-box {
+  background-color: rgba({{colors.surface_container_lowest.dark.red}}, {{colors.surface_container_lowest.dark.green}}, {{colors.surface_container_lowest.dark.blue}}, 0.94);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.22);
+  border-radius: 18px;
+  padding: 14px;
+}
+
+.cal-header-icon {
+  font-size: 20px;
+  color: {{colors.primary.dark.hex}};
+  min-width: 24px;
+}
+
+.cal-header-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: {{colors.on_surface.dark.hex}};
+}
+
+.cal-separator {
+  min-height: 1px;
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+  border-radius: 1px;
+}
+
+.cal-weekdays {
+  min-width: 252px;
+}
+
+.cal-weekday {
+  font-size: 11px;
+  font-weight: bold;
+  color: {{colors.outline.dark.hex}};
+  min-width: 30px;
+}
+
+.cal-grid {
+  min-width: 252px;
+}
+
+.cal-day {
+  font-size: 12px;
+  color: {{colors.on_surface_variant.dark.hex}};
+  min-width: 30px;
+  min-height: 28px;
+  border-radius: 8px;
+}
+
+.cal-day-empty {
+  color: transparent;
+}
+
+.cal-today {
+  color: {{colors.on_primary.dark.hex}};
+  background-color: {{colors.primary.dark.hex}};
+  font-weight: bold;
+}
+
+.cal-empty {
+  font-size: 12px;
+  color: {{colors.outline_variant.dark.hex}};
+}
+
+.cal-overlay-btn {
+  background: transparent;
+  min-width: 1920px;
+  min-height: 1080px;
+}
+
+.cal-year-box {
+  padding: 16px 18px;
+}
+
+.cal-year-month {
+  min-width: 192px;
+  padding: 9px;
+  border-radius: 12px;
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.22);
+}
+
+.cal-year-month-title {
+  font-size: 12px;
+  font-weight: bold;
+  color: {{colors.primary.dark.hex}};
+}
+
+.cal-year-weekday {
+  font-size: 10px;
+  font-weight: bold;
+  color: {{colors.outline.dark.hex}};
+  min-width: 22px;
+}
+
+.cal-year-day {
+  font-size: 11px;
+  color: {{colors.on_surface_variant.dark.hex}};
+  min-width: 22px;
+  min-height: 21px;
+  border-radius: 6px;
+}
+
+.cal-year-day.cal-today {
+  color: #000000;
+  font-size: 11px;
+}
+
+/* ==================
    Widget de WiFi
    ================== */
 .wifi-box {
@@ -73,9 +182,11 @@ scale.osd-scale slider {
 }
 
 .wifi-power-btn {
-  font-size: 20px;
-  border-radius: 8px;
-  padding: 2px 6px;
+  min-width: 40px;
+  min-height: 10px;
+  border-radius: 999px;
+  padding: 2px;
+  transition: all 0.16s ease;
 }
 
 .wifi-power-btn:hover {
@@ -83,11 +194,16 @@ scale.osd-scale slider {
 }
 
 .wifi-power-on {
-  color: {{colors.primary.dark.hex}};
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.34);
 }
 
 .wifi-power-off {
-  color: {{colors.outline_variant.dark.hex}};
+  background-color: rgba({{colors.outline_variant.dark.red}}, {{colors.outline_variant.dark.green}}, {{colors.outline_variant.dark.blue}}, 0.70);
+}
+
+.wifi-power-btn .power-switch-knob {
+  color: {{colors.on_surface.dark.hex}};
+  font-size: 14px;
 }
 
 .wifi-separator {
@@ -275,6 +391,114 @@ button.wifi-pass-accept:hover {
 }
 
 /* ==================
+   Widget de audio
+   ================== */
+.audio-box {
+  background-color: rgba({{colors.surface_container_lowest.dark.red}}, {{colors.surface_container_lowest.dark.green}}, {{colors.surface_container_lowest.dark.blue}}, 0.92);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.20);
+  border-radius: 18px;
+  padding: 14px;
+}
+
+.audio-header-icon {
+  font-size: 20px;
+  color: {{colors.primary.dark.hex}};
+  min-width: 24px;
+}
+
+.audio-header-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: {{colors.on_surface.dark.hex}};
+}
+
+.audio-header-btn {
+  font-size: 15px;
+  color: {{colors.outline.dark.hex}};
+  border-radius: 8px;
+  padding: 3px 7px;
+}
+
+.audio-header-btn:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+  color: {{colors.on_surface.dark.hex}};
+}
+
+.audio-section-title {
+  font-size: 11px;
+  font-weight: bold;
+  color: {{colors.outline.dark.hex}};
+  padding: 2px 2px 0;
+}
+
+.audio-separator {
+  min-height: 1px;
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+  border-radius: 1px;
+}
+
+.audio-device-row {
+  padding: 6px 4px;
+  border-radius: 10px;
+}
+
+.audio-device-row:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.07);
+}
+
+.audio-device-active {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.10);
+}
+
+.audio-device-icon {
+  font-size: 16px;
+  color: {{colors.primary.dark.hex}};
+  min-width: 20px;
+}
+
+.audio-device-name {
+  font-size: 12px;
+  color: {{colors.on_surface_variant.dark.hex}};
+}
+
+.audio-device-active .audio-device-name {
+  color: {{colors.primary.dark.hex}};
+  font-weight: bold;
+}
+
+.audio-device-check {
+  font-size: 14px;
+  color: {{colors.primary.dark.hex}};
+  min-width: 18px;
+}
+
+.audio-empty {
+  font-size: 12px;
+  color: {{colors.outline_variant.dark.hex}};
+  padding: 6px 0;
+}
+
+.audio-manager-btn {
+  font-size: 12px;
+  color: {{colors.outline.dark.hex}};
+  border-radius: 10px;
+  padding: 6px 10px;
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+}
+
+.audio-manager-btn:hover {
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.10);
+  color: {{colors.primary.dark.hex}};
+  border-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.25);
+}
+
+.audio-overlay-btn {
+  background: transparent;
+  min-width: 1920px;
+  min-height: 1032px;
+}
+
+/* ==================
    Widget de musica
    ================== */
 .music-box {
@@ -410,9 +634,11 @@ scale.cava-bar slider {
 }
 
 .bt-power-btn {
-  font-size: 20px;
-  border-radius: 8px;
-  padding: 2px 6px;
+  min-width: 40px;
+  min-height: 10px;
+  border-radius: 999px;
+  padding: 2px;
+  transition: all 0.16s ease;
 }
 
 .bt-power-btn:hover {
@@ -420,11 +646,16 @@ scale.cava-bar slider {
 }
 
 .bt-power-on {
-  color: {{colors.tertiary.dark.hex}};
+  background-color: rgba({{colors.tertiary.dark.red}}, {{colors.tertiary.dark.green}}, {{colors.tertiary.dark.blue}}, 0.34);
 }
 
 .bt-power-off {
-  color: {{colors.outline_variant.dark.hex}};
+  background-color: rgba({{colors.outline_variant.dark.red}}, {{colors.outline_variant.dark.green}}, {{colors.outline_variant.dark.blue}}, 0.70);
+}
+
+.bt-power-btn .power-switch-knob {
+  color: {{colors.on_surface.dark.hex}};
+  font-size: 14px;
 }
 
 .bt-separator {
@@ -522,44 +753,125 @@ scale.cava-bar slider {
    Widget de sistema
    ================== */
 .sys-box {
-  background-color: rgba({{colors.surface_container_lowest.dark.red}}, {{colors.surface_container_lowest.dark.green}}, {{colors.surface_container_lowest.dark.blue}}, 0.88);
-  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.18);
+  background-color: rgba({{colors.surface_container_lowest.dark.red}}, {{colors.surface_container_lowest.dark.green}}, {{colors.surface_container_lowest.dark.blue}}, 0.94);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.22);
   border-radius: 18px;
-  padding: 20px 24px;
+  padding: 14px;
+}
+
+.sys-header {
+  padding: 0 2px 2px;
+}
+
+.sys-header-icon {
+  font-size: 20px;
+  color: {{colors.primary.dark.hex}};
+  min-width: 24px;
+}
+
+.sys-header-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: {{colors.on_surface.dark.hex}};
+}
+
+.sys-header-chip {
+  font-size: 10px;
+  color: {{colors.primary.dark.hex}};
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.16);
+  border-radius: 999px;
+  padding: 3px 8px;
+}
+
+.sys-rings {
+  margin-top: 2px;
+}
+
+.sys-ring-card {
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 6px 14px 4px;
 }
 
 circular-progress.cpu-ring {
   color: {{colors.primary.dark.hex}};
-  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.40);
-  min-width: 120px;
-  min-height: 120px;
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.44);
+  min-width: 104px;
+  min-height: 104px;
 }
 
 circular-progress.ram-ring {
-  color: {{colors.secondary.dark.hex}};
-  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.40);
-  min-width: 120px;
-  min-height: 120px;
+  color: {{colors.tertiary.dark.hex}};
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.44);
+  min-width: 104px;
+  min-height: 104px;
 }
 
 .sys-ring-inner {
-  min-width: 105px;
-  min-height: 105px;
+  min-width: 92px;
+  min-height: 92px;
 }
 
 .sys-percent {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   color: {{colors.on_surface.dark.hex}};
-  margin-top: 40px;
+  margin-top: 36px;
 }
 
 .sys-label {
-  font-size: 13px;
-  color: {{colors.outline.dark.hex}};
+  font-size: 12px;
+  font-weight: bold;
+  color: {{colors.on_surface.dark.hex}};
 }
 
 .sys-sublabel {
   font-size: 11px;
-  color: {{colors.outline_variant.dark.hex}};
+  color: {{colors.outline.dark.hex}};
+}
+
+.sys-separator {
+  min-height: 1px;
+  background-color: rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.12);
+  border-radius: 1px;
+}
+
+.temp-list {
+  background-color: rgba({{colors.surface_variant.dark.red}}, {{colors.surface_variant.dark.green}}, {{colors.surface_variant.dark.blue}}, 0.12);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.08);
+  border-radius: 14px;
+  padding: 8px;
+}
+
+.temp-row {
+  background-color: rgba({{colors.surface_container_lowest.dark.red}}, {{colors.surface_container_lowest.dark.green}}, {{colors.surface_container_lowest.dark.blue}}, 0.34);
+  border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.08);
+  border-radius: 10px;
+  padding: 7px 9px;
+}
+
+.temp-icon {
+  font-size: 14px;
+  color: {{colors.primary.dark.hex}};
+  min-width: 20px;
+}
+
+.temp-name {
+  font-size: 12px;
+  color: {{colors.on_surface_variant.dark.hex}};
+}
+
+.temp-value {
+  font-size: 12px;
+  font-weight: bold;
+  color: {{colors.on_surface.dark.hex}};
+  min-width: 44px;
+}
+
+.temp-empty {
+  font-size: 12px;
+  color: {{colors.outline.dark.hex}};
+  padding: 8px;
 }

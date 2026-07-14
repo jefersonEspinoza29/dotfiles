@@ -5,4 +5,5 @@ if eww active-windows | grep -q "bluetooth-widget"; then
 else
     eww open bt-overlay
     eww open bluetooth-widget
+    ~/.config/eww/scripts/autoclose-widget.sh bluetooth-widget bt-overlay 15
 fi

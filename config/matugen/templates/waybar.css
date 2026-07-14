@@ -25,17 +25,17 @@ window#waybar {
 
 /* ── Workspaces ──────────────────────────────────────────── */
 #workspaces {
-    padding: 0 2px;
+    padding: 0 1px;
 }
 
 #workspaces button {
     color: {{colors.surface_variant.dark.hex}};
     background: transparent;
-    padding: 0 5px;
+    padding: 0 2px;
     border-radius: 0;
     transition: all 0.15s ease;
-    font-size: 16px;
-    min-width: 0;
+    font-size: 15px;
+    min-width: 14px;
 }
 
 #workspaces button:hover {
@@ -48,23 +48,28 @@ window#waybar {
 #workspaces button.empty {
     color: {{colors.surface_variant.dark.hex}};
     font-size: 12px;
+    background: transparent;
 }
 
 /* tiene ventanas pero no activo */
 #workspaces button.occupied {
     color: {{colors.on_surface_variant.dark.hex}};
     font-size: 14px;
+    background: transparent;
 }
 
 /* activo */
 #workspaces button.active {
     color: {{colors.primary.dark.hex}};
-    font-size: 18px;
+    background: transparent;
+    font-size: 17px;
+    padding: 0 2px;
 }
 
 /* urgente */
 #workspaces button.urgent {
     color: {{colors.error.dark.hex}};
+    background: transparent;
     font-size: 16px;
 }
 
@@ -96,7 +101,7 @@ window#waybar {
 #backlight,
 #pulseaudio,
 #bluetooth,
-#network,
+#custom-wifi,
 #battery,
 #custom-power {
     padding: 0 9px;
@@ -117,8 +122,9 @@ window#waybar {
 #bluetooth.disabled   { color: {{colors.surface_variant.dark.hex}}; }
 
 /* ── Red ─────────────────────────────────────────────────── */
-#network              { color: {{colors.secondary.dark.hex}}; }
-#network.disconnected { color: {{colors.outline.dark.hex}}; }
+#custom-wifi              { color: {{colors.secondary.dark.hex}}; }
+#custom-wifi.disconnected { color: {{colors.outline.dark.hex}}; }
+#custom-wifi.off          { color: {{colors.surface_variant.dark.hex}}; }
 
 /* ── Batería ─────────────────────────────────────────────── */
 #battery          { color: {{colors.tertiary.dark.hex}}; }

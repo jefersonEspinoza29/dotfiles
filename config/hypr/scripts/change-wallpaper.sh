@@ -22,20 +22,6 @@ apply_theme() {
 
     # Recargar colores de borde en Hyprland
     hyprctl reload >/dev/null 2>&1
-
-    # Matar todo lo relacionado con eww antes de reiniciar
-    pkill -f "playerctl.*--follow" 2>/dev/null
-    pkill -f "music-monitor.sh" 2>/dev/null
-    pkill -f "art-spin.sh" 2>/dev/null
-    pkill -f "cava.sh" 2>/dev/null
-
-    # Reiniciar eww para aplicar el nuevo SCSS
-    eww kill 2>/dev/null
-    sleep 0.8
-    eww daemon &
-    sleep 0.8
-    # El monitor decide si abrir el widget o no (systemd-run para que sobreviva)
-    systemd-run --user --no-block bash ~/.config/eww/scripts/music-monitor.sh
 }
 
 while true; do

@@ -5,4 +5,5 @@ if eww active-windows | grep -q "wifi-widget"; then
 else
     eww open wifi-overlay
     eww open wifi-widget
+    ~/.config/eww/scripts/autoclose-widget.sh wifi-widget wifi-overlay 15
 fi

@@ -43,15 +43,4 @@ echo "$WALL" > "$CACHE"
     fi
 
     hyprctl reload >/dev/null 2>&1
-
-    pkill -f "playerctl.*--follow" 2>/dev/null
-    pkill -f "music-monitor.sh" 2>/dev/null
-    pkill -f "art-spin.sh" 2>/dev/null
-    pkill -f "cava.sh" 2>/dev/null
-
-    eww kill 2>/dev/null
-    sleep 0.8
-    eww daemon &
-    sleep 0.8
-    systemd-run --user --no-block bash ~/.config/eww/scripts/music-monitor.sh
 } &
