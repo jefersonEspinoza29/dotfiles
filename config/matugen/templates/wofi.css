@@ -35,8 +35,8 @@ window {
 }
 
 #entry {
-  min-width: 150px;
-  min-height: 92px;
+  min-width: 148px;
+  min-height: 96px;
   margin: 6px;
   padding: 12px 10px;
   border: 1px solid rgba({{colors.primary.dark.red}}, {{colors.primary.dark.green}}, {{colors.primary.dark.blue}}, 0.10);
@@ -51,6 +51,8 @@ window {
 
 #img {
   margin: 0 10px 0 0;
+  min-width: 56px;
+  min-height: 56px;
 }
 
 #text {
@@ -59,6 +61,7 @@ window {
   color: {{colors.on_surface_variant.dark.hex}};
   font-size: 12px;
   font-weight: 600;
+  min-width: 74px;
 }
 
 #text:selected {
