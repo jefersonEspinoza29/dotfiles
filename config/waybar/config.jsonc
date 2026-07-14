@@ -1,0 +1,151 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 40,
+    "spacing": 0,
+    "margin-top": 0,
+    "margin-left": 2,
+    "margin-right": 2,
+
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["backlight", "pulseaudio", "bluetooth", "network", "tray", "battery", "custom/power"],
+
+    "hyprland/workspaces": {
+    "format": "{icon}{windows}",
+    "format-window-separator": " ",
+    "format-icons": {
+        "occupied": "",
+        "default": "",
+        "empty": "󰄰",
+        "urgent": "󱅫"
+    },
+    "window-rewrite-default": "󰘔",
+    "window-rewrite": {
+        "kitty": "󰞷",
+        "brave-browser": "󰖟",
+        "code-oss": "󰨞",
+        "code": "󰨞",
+        "discord": "󰙯",
+        "net.lutris.Lutris": "󰊗",
+        "steam": "󰊗",
+        "thunar": "󰉋",
+        "vlc": "󰕼"
+    },
+    "persistent-workspaces": {
+        "eDP-2": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        "HDMI-A-1": [10, 11, 12, 13, 14, 15, 16, 17, 18]
+    },
+    "on-click": "activate",
+    "sort-by-number": true,
+    "active-only": false,
+    "all-outputs": false
+},
+
+    "clock": {
+        "format": "{:%H:%M}",
+        "format-alt": "{:%A, %d de %B de %Y}",
+        "locale": "es_PE.UTF-8",
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "actions": {
+            "on-click": "mode",
+            "on-click-right": "shift_up"
+        },
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "weeks-pos": "",
+            "on-scroll": 1,
+            "format": {
+                "months":   "<span color='#cdd6f4'><b>{}</b></span>",
+                "days":     "<span color='#cdd6f4'>{}</span>",
+                "weeks":    "<span color='#89b4fa'><b>S{}</b></span>",
+                "weekdays": "<span color='#a6e3a1'><b>{}</b></span>",
+                "today":    "<span color='#f38ba8'><b><u>{}</u></b></span>"
+            }
+        }
+    },
+
+    "tray": {
+        "icon-size": 18,
+        "spacing": 8,
+        "show-passive-items": true
+    },
+
+    "cpu": {
+        "format": "󰻠 {usage}%",
+        "interval": 2,
+        "tooltip": false
+    },
+
+    "memory": {
+        "format": "󰍛 {percentage}%",
+        "interval": 2,
+        "tooltip-format": "{used:0.1f}G / {total:0.1f}G"
+    },
+
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "on-scroll-up": "brillo -A 5",
+        "on-scroll-down": "brillo -U 5",
+        "tooltip": false
+    },
+
+    "pulseaudio": {
+        "format": "󰕾 {volume}%",
+        "format-muted": "󰖁 mute",
+        "on-scroll-up": "wpctl set-volume -l 1.25 @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "pavucontrol",
+        "tooltip": false
+    },
+
+    "bluetooth": {
+        "format-off":       "󰂲",
+        "format-on":        "󰂯",
+        "format-connected": "󰂱 {device_alias}",
+        "format-disabled":  "󰂲",
+        "on-click": "~/.config/eww/scripts/bt-toggle.sh",
+        "on-click-right": "blueman-manager",
+        "tooltip-format-off": "Bluetooth apagado",
+        "tooltip-format-on": "Bluetooth encendido\nSin dispositivos",
+        "tooltip-format-connected": "{controller_alias}\n{num_connections} conectado(s)\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "• {device_alias}"
+    },
+
+    "network": {
+        "format-wifi":       "{icon} {signalStrength}%",
+        "format-ethernet":   "󰈀",
+        "format-linked":     "󰈀",
+        "format-disconnected":"󰤭",
+        "format-icons":      ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "tooltip-format-wifi":     "{essid}\n{signalStrength}% — {ipaddr}",
+        "tooltip-format-ethernet": "{ifname}\n{ipaddr}",
+        "tooltip-format-disconnected": "Sin conexión",
+        "on-click": "~/.config/eww/scripts/wifi-toggle.sh",
+        "interval": 3
+    },
+
+    "battery": {
+    "bat": "BAT1",
+    "format": "{icon} {capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "format-plugged":  "󰂄 {capacity}%",
+    "format-full":     "󰁹 {capacity}%",
+    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "states": {
+        "critical": 20,
+        "warning":  40,
+        "good":     80
+    },
+    "tooltip": false
+},
+
+    "custom/power": {
+        "format": "⏻",
+        "tooltip": false,
+        "on-click": "wlogout -L 310 -R 310 -T 100 -B 100"
+    }
+}

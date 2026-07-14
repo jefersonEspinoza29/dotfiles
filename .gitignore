@@ -1,38 +1,15 @@
-# Ignorar todo por defecto para no subir caches, perfiles o datos privados.
-*
+# Generados por matugen (se regeneran al cambiar wallpaper)
+config/wlogout/colors.css
+config/wlogout/icons_colored/
+config/wlogout/icons_default/
+config/kitty/colors.conf
+config/hypr/modules/colors.conf
+config/waybar/style.css
+config/gtk-3.0/gtk.css
+config/gtk-4.0/gtk.css
+config/eww/eww.scss
 
-# Archivos base del repo.
-!.gitignore
-
-# Carpetas de configuracion versionadas.
-!eww/
-!eww/**
-!hypr/
-!hypr/**
-!kitty/
-!kitty/**
-!matugen/
-!matugen/**
-!swaync/
-!swaync/**
-!waybar/
-!waybar/**
-!wlogout/
-!wlogout/**
-
-# Generados por Matugen o por apps en runtime.
-eww/eww.scss
-hypr/modules/colors.conf
-kitty/colors.conf
-waybar/style.css
-wlogout/colors.css
-wlogout/icons_colored/
-wlogout/icons_default/
-
-# Basura comun.
+# Sistema
 *.log
 *.bak
-*.tmp
-__pycache__/
-*.pyc
 .DS_Store
