@@ -38,12 +38,12 @@ button:focus {
 }
 
 /* iconos en reposo — color on_surface_variant (muted) */
-#lock      { background-image: url("/home/jheff/.config/wlogout/icons_default/lock.png"); }
-#logout    { background-image: url("/home/jheff/.config/wlogout/icons_default/logout.png"); }
-#shutdown  { background-image: url("/home/jheff/.config/wlogout/icons_default/shutdown.png"); }
-#reboot    { background-image: url("/home/jheff/.config/wlogout/icons_default/reboot.png"); }
-#suspend   { background-image: url("/home/jheff/.config/wlogout/icons_default/suspend.png"); }
-#hibernate { background-image: url("/home/jheff/.config/wlogout/icons_default/hibernate.png"); }
+#lock      { background-image: url("icons_default/lock.png"); }
+#logout    { background-image: url("icons_default/logout.png"); }
+#shutdown  { background-image: url("icons_default/shutdown.png"); }
+#reboot    { background-image: url("icons_default/reboot.png"); }
+#suspend   { background-image: url("icons_default/suspend.png"); }
+#hibernate { background-image: url("icons_default/hibernate.png"); }
 
 /* hover — icono cambia al color semántico del wallpaper */
 #lock:hover {
@@ -51,42 +51,42 @@ button:focus {
     border-color: alpha(@primary, 0.45);
     color: @primary;
     box-shadow: 0 0 30px alpha(@primary, 0.20);
-    background-image: url("/home/jheff/.config/wlogout/icons_colored/lock.png");
+    background-image: url("icons_colored/lock.png");
 }
 #logout:hover {
     background-color: alpha(@secondary, 0.10);
     border-color: alpha(@secondary, 0.45);
     color: @secondary;
     box-shadow: 0 0 30px alpha(@secondary, 0.20);
-    background-image: url("/home/jheff/.config/wlogout/icons_colored/logout.png");
+    background-image: url("icons_colored/logout.png");
 }
 #shutdown:hover {
     background-color: alpha(@error, 0.10);
     border-color: alpha(@error, 0.45);
     color: @error;
     box-shadow: 0 0 30px alpha(@error, 0.20);
-    background-image: url("/home/jheff/.config/wlogout/icons_colored/shutdown.png");
+    background-image: url("icons_colored/shutdown.png");
 }
 #reboot:hover {
     background-color: alpha(@tertiary, 0.10);
     border-color: alpha(@tertiary, 0.45);
     color: @tertiary;
     box-shadow: 0 0 30px alpha(@tertiary, 0.20);
-    background-image: url("/home/jheff/.config/wlogout/icons_colored/reboot.png");
+    background-image: url("icons_colored/reboot.png");
 }
 #suspend:hover {
     background-color: alpha(@secondary, 0.10);
     border-color: alpha(@secondary, 0.45);
     color: @secondary;
     box-shadow: 0 0 30px alpha(@secondary, 0.20);
-    background-image: url("/home/jheff/.config/wlogout/icons_colored/suspend.png");
+    background-image: url("icons_colored/suspend.png");
 }
 #hibernate:hover {
     background-color: alpha(@tertiary, 0.10);
     border-color: alpha(@tertiary, 0.45);
     color: @tertiary;
     box-shadow: 0 0 30px alpha(@tertiary, 0.20);
-    background-image: url("/home/jheff/.config/wlogout/icons_colored/hibernate.png");
+    background-image: url("icons_colored/hibernate.png");
 }
 
 /* active (click) */

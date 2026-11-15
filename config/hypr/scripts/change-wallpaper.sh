@@ -29,15 +29,24 @@ while true; do
     LAST=""
     [ -f "$CACHE" ] && LAST=$(cat "$CACHE")
 
-    while :; do
-        WALL=$(find "$WALLDIR" -type f \( \
-            -iname "*.jpg" -o \
-            -iname "*.jpeg" -o \
-            -iname "*.png" \
-        \) | shuf -n 1)
-
-        [ "$WALL" != "$LAST" ] && break
-    done
+    mapfile -t CANDIDATES < <(find "$WALLDIR" -type f \( \
+        -iname "*.jpg" -o \
+        -iname "*.jpeg" -o \
+        -iname "*.png" \
+    \))
+    if [ "${#CANDIDATES[@]}" -eq 0 ]; then
+        echo "No hay wallpapers en $WALLDIR" >&2
+        sleep 180
+        continue
+    fi
+    if [ "${#CANDIDATES[@]}" -eq 1 ]; then
+        WALL="${CANDIDATES[0]}"
+    else
+        while :; do
+            WALL=$(printf '%s\n' "${CANDIDATES[@]}" | shuf -n 1)
+            [ "$WALL" != "$LAST" ] && break
+        done
+    fi
 
     TRANSITION=$(shuf -e fade wipe wave grow outer left right top bottom any -n 1)
 

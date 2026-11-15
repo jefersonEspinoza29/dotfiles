@@ -30,10 +30,20 @@ echo -e "${N}"
 echo "  Arch Linux + Hyprland — Acer Predator Helios 300"
 echo
 
-# ── 1. yay ───────────────────────────────────────────────────
+# ── 1. Multilib + actualizar sistema ───────────────────────────
+if ! grep -q "^\[multilib\]" /etc/pacman.conf; then
+    info "Habilitando repositorio [multilib] (paquetes lib32-*)..."
+    sudo sed -i '/^#\[multilib\]/{s/^#//;n;s/^#//}' /etc/pacman.conf
+    ok "multilib habilitado"
+fi
+
+info "Actualizando sistema..."
+sudo pacman -Syu --needed --noconfirm git base-devel
+ok "Sistema actualizado"
+
+# ── 2. yay ───────────────────────────────────────────────────
 if ! command -v yay >/dev/null 2>&1; then
     info "Instalando yay..."
-    sudo pacman -S --needed --noconfirm git base-devel
     tmp=$(mktemp -d)
     git clone https://aur.archlinux.org/yay.git "$tmp/yay"
     (cd "$tmp/yay" && makepkg -si --noconfirm)
@@ -42,11 +52,6 @@ if ! command -v yay >/dev/null 2>&1; then
 else
     ok "yay ya está instalado"
 fi
-
-# ── 2. Actualizar sistema ─────────────────────────────────────
-info "Actualizando sistema..."
-sudo pacman -Syu --noconfirm
-ok "Sistema actualizado"
 
 # ── 3. Paquetes base ─────────────────────────────────────────
 PKGS=(
@@ -63,8 +68,8 @@ PKGS=(
     ffmpeg cava
 
     # Red / Bluetooth / Sistema
-    blueman network-manager-applet nm-connection-editor
-    polkit jq lsof
+    blueman bluez bluez-utils network-manager-applet nm-connection-editor
+    polkit hyprpolkitagent jq lsof
     git curl
 
     # Wayland utils
@@ -98,6 +103,14 @@ info "Instalando paquetes pacman..."
 sudo pacman -S --needed --noconfirm "${PKGS[@]}"
 ok "Paquetes base instalados"
 
+# ── 3b. Locale es_PE (lo usa waybar para el reloj) ─────────────
+if ! locale -a 2>/dev/null | grep -qi "^es_PE"; then
+    info "Generando locale es_PE.UTF-8..."
+    sudo sed -i 's/^#\(es_PE.UTF-8\)/\1/' /etc/locale.gen
+    sudo locale-gen
+    ok "Locale es_PE.UTF-8 generado"
+fi
+
 # ── 4. Drivers Intel ─────────────────────────────────────────
 if ask "¿Instalar drivers Intel (GPU integrada)?"; then
     sudo pacman -S --needed --noconfirm \
@@ -111,6 +124,9 @@ fi
 NVIDIA=false
 if ask "¿Instalar drivers NVIDIA?"; then
     NVIDIA=true
+    # Headers del kernel actualmente corriendo (dkms los necesita para compilar)
+    KERNEL_PKGBASE="$(cat "/usr/lib/modules/$(uname -r)/pkgbase" 2>/dev/null || echo linux)"
+    sudo pacman -S --needed --noconfirm "${KERNEL_PKGBASE}-headers"
     # nvidia-open-dkms = driver open-source oficial NVIDIA (Turing/RTX en adelante)
     sudo pacman -S --needed --noconfirm \
         nvidia-open-dkms nvidia-utils lib32-nvidia-utils nvidia-settings nvidia-prime
@@ -156,7 +172,6 @@ AUR=(
     nwg-look
     bibata-cursor-theme
     gapless
-    g4music
     ntfs-3g
     auto-cpufreq
 )
@@ -232,19 +247,53 @@ if ask "¿Instalar Wine + gamemode?"; then
 fi
 
 # ── 11. Predator Sense / RGB ────────────────────────────────
+PS_REPO_URL="https://github.com/cleyton1986/predator-sense.git"
+PS_DIR="$HOME/herramientas/predator-sense"
 if ask "¿Instalar Predator Sense (RGB, tecla Predator, ventiladores y perfiles)?"; then
-    warn "Se usará el instalador no oficial de cleyton1986/predator-sense."
+    warn "Se compilará cleyton1986/predator-sense desde fuente (no es oficial de Acer)."
     warn "Instala módulo DKMS y servicios para controlar hardware Acer Predator."
-    tmp=$(mktemp -d)
-    ps_installer="$tmp/predator-sense-install.sh"
-    if curl -fsSL \
-        https://raw.githubusercontent.com/cleyton1986/predator-sense/main/scripts/remote-install.sh \
-        -o "$ps_installer" && sudo bash "$ps_installer"; then
-        rm -rf "$tmp"
+    warn "Queda con auto-actualización: cada pacman/yay revisa si hay una versión nueva."
+
+    PS_KERNEL_PKGBASE="$(cat "/usr/lib/modules/$(uname -r)/pkgbase" 2>/dev/null || echo linux)"
+    sudo pacman -S --needed --noconfirm \
+        gtk4 libadwaita pkgconf gcc make dkms "${PS_KERNEL_PKGBASE}-headers"
+
+    if ! command -v cargo >/dev/null 2>&1 && [ ! -x "$HOME/.cargo/bin/cargo" ]; then
+        info "Instalando Rust (rustup)..."
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal
+    fi
+
+    mkdir -p "$(dirname "$PS_DIR")"
+    if [ -d "$PS_DIR/.git" ]; then
+        info "Actualizando checkout existente en $PS_DIR..."
+        git -C "$PS_DIR" pull --ff-only || warn "No se pudo actualizar, se usa la copia local tal cual"
+    else
+        info "Clonando predator-sense en $PS_DIR..."
+        git clone "$PS_REPO_URL" "$PS_DIR"
+    fi
+
+    # Config root-owned que lee el actualizador del hook de pacman
+    printf 'OWNER=%q\nHOME_DIR=%q\nREPO=%q\n' "$USER" "$HOME" "$PS_DIR" |
+        sudo tee /etc/predator-sense-updater.conf >/dev/null
+    sudo chmod 600 /etc/predator-sense-updater.conf
+
+    sudo install -Dm755 "$DOTFILES/predator-sense/predator-sense-update.sh" /usr/local/bin/predator-sense-update.sh
+    sudo install -Dm644 "$DOTFILES/predator-sense/predator-sense-update.hook" /etc/pacman.d/hooks/predator-sense-update.hook
+    sudo mkdir -p /var/lib/predator-sense-updater
+    sudo touch /var/log/predator-sense-update.log
+
+    info "Compilando Predator Sense (puede tardar unos minutos)..."
+    if (
+        source "$HOME/.cargo/env" 2>/dev/null
+        cd "$PS_DIR/predator-sense-gui" \
+            && cargo build --release \
+            && cargo build --release --manifest-path installer/Cargo.toml \
+            && sudo installer/target/release/predator-sense-installer --install
+    ); then
+        git -C "$PS_DIR" rev-parse HEAD | sudo tee /var/lib/predator-sense-updater/installed-commit >/dev/null
         ok "Predator Sense instalado. Ábrelo desde el menú o con la tecla Predator."
     else
-        rm -rf "$tmp"
-        err "No se pudo instalar Predator Sense"
+        warn "No se pudo compilar/instalar Predator Sense ahora; el hook lo reintentará solo."
     fi
 fi
 
@@ -266,6 +315,9 @@ chmod +x ~/.config/wlogout/colorize.py            || true
 
 # ── 13. Shell config ─────────────────────────────────────────
 if [ -f "$DOTFILES/.bashrc" ]; then
+    if [ -f "$HOME/.bashrc" ] && ! cmp -s "$DOTFILES/.bashrc" "$HOME/.bashrc"; then
+        cp "$HOME/.bashrc" "$HOME/.bashrc.bak-$(date +%s)"
+    fi
     cp "$DOTFILES/.bashrc" "$HOME/.bashrc"
     ok "~/.bashrc"
 fi
@@ -282,11 +334,20 @@ if [ -d "$DOTFILES/wallpapers" ]; then
 fi
 
 # ── 16. Generar colores con matugen ──────────────────────────
-FIRST_WALL=$(find "$HOME/Wallpapers" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) 2>/dev/null | head -1)
+if [ -d "$HOME/Wallpapers" ]; then
+    FIRST_WALL=$(find "$HOME/Wallpapers" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -print -quit 2>/dev/null)
+else
+    FIRST_WALL=""
+fi
 if [[ -n "${FIRST_WALL:-}" ]]; then
     info "Generando colores iniciales con matugen..."
-    matugen image "$FIRST_WALL" --mode dark --quiet 2>/dev/null || warn "matugen falló, ejecuta manualmente más tarde"
-    ok "Colores generados"
+    if matugen image "$FIRST_WALL" --mode dark --prefer saturation --source-color-index 0 --quiet 2>/dev/null; then
+        mkdir -p "$HOME/.cache"
+        echo "$FIRST_WALL" > "$HOME/.cache/last_wallpaper"
+        ok "Colores generados"
+    else
+        warn "matugen falló, ejecuta manualmente más tarde: matugen image <wallpaper> --mode dark --prefer saturation --source-color-index 0"
+    fi
 fi
 
 # ── 17. Habilitar SDDM ───────────────────────────────────────
@@ -310,7 +371,7 @@ if ask "¿Instalar tema SDDM astronaut al final?"; then
         ok "Tema SDDM astronaut instalado y configurado"
     else
         rm -rf "$tmp"
-        err "No se pudo instalar el tema SDDM astronaut"
+        warn "No se pudo instalar el tema SDDM astronaut"
     fi
 fi
 

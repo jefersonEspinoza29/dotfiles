@@ -30,8 +30,11 @@ local menu        = "wofi --show drun --allow-images --conf ~/.config/wofi/confi
 hl.on("hyprland.start", function ()
     hl.exec_cmd("/usr/lib/xdg-desktop-portal-hyprland &")
     hl.exec_cmd("bash -c 'sleep 1 && /usr/lib/xdg-desktop-portal --replace'")
+    hl.exec_cmd("systemctl --user start hyprpolkitagent")
 
     hl.exec_cmd("awww-daemon")
+    hl.exec_cmd("bash -c 'sleep 1 && ~/.config/hypr/scripts/wallpaper.sh'")
+    hl.exec_cmd("wl-paste --type text/plain --watch cliphist -max-items 7 store")
     hl.exec_cmd("swaync")
     hl.exec_cmd("hypridle")
     hl.exec_cmd("waybar")

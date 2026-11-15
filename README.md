@@ -128,6 +128,12 @@ sudo plymouth-set-default-theme -R supramk4-jheff
 
 ---
 
+## Configuración de Hyprland
+
+Hyprland 0.57+ usa **`config/hypr/hyprland.lua`** como archivo de configuración real (Lua). `hyprland.conf` y `modules/*.conf` quedaron del esquema viejo, se copian por compatibilidad pero **ya no los lee nada** — para tocar binds, monitores, autostart, etc., edita `hyprland.lua`.
+
+---
+
 ## Sistema de colores (Matugen)
 
 Los colores se generan desde el wallpaper con Material You y se aplican automáticamente a:
@@ -170,12 +176,10 @@ El script `~/.config/wlogout/colorize.py` se ejecuta automáticamente como post-
 
 ## Predator Sense — RGB / tecla Predator / ventiladores
 
-El instalador puede instalar [Predator Sense for Linux](https://github.com/cleyton1986/predator-sense), que agrega la app gráfica, el módulo DKMS, reglas udev y el servicio para abrirla con la tecla Predator.
+El instalador compila [Predator Sense for Linux](https://github.com/cleyton1986/predator-sense) desde el código fuente (no es un proyecto oficial de Acer) y lo deja con auto-actualización:
 
-Después de instalarlo puedes abrirlo desde:
-
-```bash
-/opt/predator-sense/predator-sense
-```
-
-También aparece en el menú de aplicaciones como **Predator Sense**.
+- **Código fuente:** `~/herramientas/predator-sense` (clon de git, se actualiza solo).
+- **App instalada:** `/opt/predator-sense/predator-sense` (también aparece en el menú de aplicaciones y se abre con la tecla Predator).
+- **Auto-actualización:** un hook de pacman (`/etc/pacman.d/hooks/predator-sense-update.hook` → `/usr/local/bin/predator-sense-update.sh`) revisa en cada `pacman`/`yay` si hay commits nuevos en el repo. Si los hay, recompila e instala en segundo plano (no bloquea la terminal ni compite por el lock de pacman).
+- **Log:** `/var/log/predator-sense-update.log`.
+- Si hacés cambios locales a mano en `~/herramientas/predator-sense` (commits sin pushear), el hook los detecta y **no** sobrescribe nada — solo actualiza cuando el checkout está limpio.
