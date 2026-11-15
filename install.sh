@@ -10,12 +10,23 @@ PLYMOUTH_THEME_NAME="supramk4-jheff"
 PLYMOUTH_THEME_REPO="$DOTFILES/plymouth/$PLYMOUTH_THEME_NAME"
 
 # ── Colores ──────────────────────────────────────────────────
-R='\033[0;31m'; G='\033[0;32m'; Y='\033[1;33m'; B='\033[0;34m'; N='\033[0m'
+R='\033[0;31m'; G='\033[0;32m'; Y='\033[1;33m'; B='\033[0;34m'; D='\033[2m'; N='\033[0m'
 info()    { echo -e "${B}==> ${N}$*"; }
 ok()      { echo -e "${G} ✔  ${N}$*"; }
 warn()    { echo -e "${Y} ⚠  ${N}$*"; }
 err()     { echo -e "${R} ✘  ${N}$*"; exit 1; }
 ask()     { local r; read -rp "$(echo -e "${Y}[?]${N} $1 [s/N]: ")" r; [[ "$r" =~ ^[sS]$ ]]; }
+
+TOTAL_STEPS=18
+STEP_N=0
+step() {
+    STEP_N=$((STEP_N + 1))
+    echo
+    echo -e "${B}┌─[${N}${STEP_N}/${TOTAL_STEPS}${B}]${N} $*"
+}
+
+SECONDS=0
+trap 'echo -e "\n${R} ✘  Falló en install.sh, línea ${LINENO} (paso ${STEP_N}/${TOTAL_STEPS}).${N} Revisá el mensaje de arriba; podés corregirlo y volver a correr el script, es seguro repetirlo." >&2' ERR
 
 command -v pacman >/dev/null 2>&1 || err "Este script requiere Arch Linux"
 
@@ -30,7 +41,8 @@ echo -e "${N}"
 echo "  Arch Linux + Hyprland — Acer Predator Helios 300"
 echo
 
-# ── 1. Multilib + actualizar sistema ───────────────────────────
+# Paso 1
+step "Repositorio multilib + actualizar sistema"
 if ! grep -q "^\[multilib\]" /etc/pacman.conf; then
     info "Habilitando repositorio [multilib] (paquetes lib32-*)..."
     sudo sed -i '/^#\[multilib\]/{s/^#//;n;s/^#//}' /etc/pacman.conf
@@ -41,7 +53,8 @@ info "Actualizando sistema..."
 sudo pacman -Syu --needed --noconfirm git base-devel
 ok "Sistema actualizado"
 
-# ── 2. yay ───────────────────────────────────────────────────
+# Paso 2
+step "yay"
 if ! command -v yay >/dev/null 2>&1; then
     info "Instalando yay..."
     tmp=$(mktemp -d)
@@ -53,7 +66,8 @@ else
     ok "yay ya está instalado"
 fi
 
-# ── 3. Paquetes base ─────────────────────────────────────────
+# Paso 3
+step "Paquetes base"
 PKGS=(
     # Entorno Hyprland
     hyprland hypridle hyprlock
@@ -103,7 +117,7 @@ info "Instalando paquetes pacman..."
 sudo pacman -S --needed --noconfirm "${PKGS[@]}"
 ok "Paquetes base instalados"
 
-# ── 3b. Locale es_PE (lo usa waybar para el reloj) ─────────────
+# Locale es_PE (lo usa waybar para el reloj)
 if ! locale -a 2>/dev/null | grep -qi "^es_PE"; then
     info "Generando locale es_PE.UTF-8..."
     sudo sed -i 's/^#\(es_PE.UTF-8\)/\1/' /etc/locale.gen
@@ -111,7 +125,8 @@ if ! locale -a 2>/dev/null | grep -qi "^es_PE"; then
     ok "Locale es_PE.UTF-8 generado"
 fi
 
-# ── 4. Drivers Intel ─────────────────────────────────────────
+# Paso 4
+step "Drivers Intel"
 if ask "¿Instalar drivers Intel (GPU integrada)?"; then
     sudo pacman -S --needed --noconfirm \
         mesa lib32-mesa \
@@ -120,7 +135,8 @@ if ask "¿Instalar drivers Intel (GPU integrada)?"; then
     ok "Drivers Intel instalados"
 fi
 
-# ── 5. Drivers NVIDIA ────────────────────────────────────────
+# Paso 5
+step "Drivers NVIDIA"
 NVIDIA=false
 if ask "¿Instalar drivers NVIDIA?"; then
     NVIDIA=true
@@ -149,7 +165,8 @@ if ask "¿Instalar drivers NVIDIA?"; then
     echo
 fi
 
-# ── 6. Brillo (desde fuente) ─────────────────────────────────
+# Paso 6
+step "Brillo (desde fuente)"
 if ! command -v brillo >/dev/null 2>&1; then
     info "Compilando brillo..."
     tmp=$(mktemp -d)
@@ -162,7 +179,8 @@ else
     ok "brillo ya está instalado"
 fi
 
-# ── 7. Paquetes AUR ──────────────────────────────────────────
+# Paso 7
+step "Paquetes AUR"
 AUR=(
     brave-bin
     wlogout
@@ -190,7 +208,8 @@ ok "bluetooth habilitado"
 sudo systemctl enable --now auto-cpufreq
 ok "auto-cpufreq habilitado"
 
-# ── 8. Plymouth ──────────────────────────────────────────────
+# Paso 8
+step "Plymouth"
 if ask "¿Instalar Plymouth (splash de arranque)?"; then
     ok "Plymouth ya fue instalado con los paquetes base"
 
@@ -230,14 +249,16 @@ if ask "¿Instalar Plymouth (splash de arranque)?"; then
     echo
 fi
 
-# ── 9. LibreOffice ───────────────────────────────────────────
+# Paso 9
+step "LibreOffice"
 if ask "¿Instalar LibreOffice en español?"; then
     sudo pacman -S --needed --noconfirm \
         libreoffice-fresh libreoffice-fresh-es hunspell-es_es
     ok "LibreOffice instalado"
 fi
 
-# ── 10. Wine / Gaming ────────────────────────────────────────
+# Paso 10
+step "Wine / Gaming"
 if ask "¿Instalar Wine + gamemode?"; then
     yay -S --needed --noconfirm \
         wine winetricks wine-gecko wine-mono \
@@ -246,7 +267,8 @@ if ask "¿Instalar Wine + gamemode?"; then
     ok "Wine + gamemode instalados"
 fi
 
-# ── 11. Predator Sense / RGB ────────────────────────────────
+# Paso 11
+step "Predator Sense / RGB"
 PS_REPO_URL="https://github.com/cleyton1986/predator-sense.git"
 PS_DIR="$HOME/herramientas/predator-sense"
 if ask "¿Instalar Predator Sense (RGB, tecla Predator, ventiladores y perfiles)?"; then
@@ -297,7 +319,8 @@ if ask "¿Instalar Predator Sense (RGB, tecla Predator, ventiladores y perfiles)
     fi
 fi
 
-# ── 12. Copiar configuraciones ───────────────────────────────
+# Paso 12
+step "Copiar configuraciones"
 info "Copiando configuraciones a ~/.config..."
 CONFIG_DIRS=(hypr waybar wofi wlogout matugen kitty eww swaync)
 for dir in "${CONFIG_DIRS[@]}"; do
@@ -313,7 +336,8 @@ chmod +x ~/.config/hypr/scripts/*.sh 2>/dev/null || true
 chmod +x ~/.config/eww/scripts/*.sh  2>/dev/null || true
 chmod +x ~/.config/wlogout/colorize.py            || true
 
-# ── 13. Shell config ─────────────────────────────────────────
+# Paso 13
+step "Shell config"
 if [ -f "$DOTFILES/.bashrc" ]; then
     if [ -f "$HOME/.bashrc" ] && ! cmp -s "$DOTFILES/.bashrc" "$HOME/.bashrc"; then
         cp "$HOME/.bashrc" "$HOME/.bashrc.bak-$(date +%s)"
@@ -322,18 +346,21 @@ if [ -f "$DOTFILES/.bashrc" ]; then
     ok "~/.bashrc"
 fi
 
-# ── 14. Directorios de usuario ───────────────────────────────
+# Paso 14
+step "Directorios de usuario"
 mkdir -p "$HOME/Imagenes/Capturas"
 ok "~/Imagenes/Capturas"
 
-# ── 15. Wallpapers ──────────────────────────────────────────
+# Paso 15
+step "Wallpapers"
 if [ -d "$DOTFILES/wallpapers" ]; then
     mkdir -p "$HOME/Wallpapers"
     cp -r "$DOTFILES/wallpapers/." "$HOME/Wallpapers/"
     ok "Wallpapers copiados a ~/Wallpapers"
 fi
 
-# ── 16. Generar colores con matugen ──────────────────────────
+# Paso 16
+step "Generar colores con matugen"
 if [ -d "$HOME/Wallpapers" ]; then
     FIRST_WALL=$(find "$HOME/Wallpapers" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -print -quit 2>/dev/null)
 else
@@ -350,14 +377,16 @@ if [[ -n "${FIRST_WALL:-}" ]]; then
     fi
 fi
 
-# ── 17. Habilitar SDDM ───────────────────────────────────────
+# Paso 17
+step "Habilitar SDDM"
 if ask "¿Habilitar SDDM al inicio del sistema?"; then
     sudo systemctl enable sddm
     sudo systemctl set-default graphical.target
     ok "SDDM habilitado"
 fi
 
-# ── 18. Tema SDDM astronaut ──────────────────────────────────
+# Paso 18
+step "Tema SDDM astronaut"
 if ask "¿Instalar tema SDDM astronaut al final?"; then
     tmp=$(mktemp -d)
     sddm_installer="$tmp/sddm-astronaut-install.sh"
@@ -380,6 +409,8 @@ echo
 echo -e "${G}╔═══════════════════════════════════════════╗${N}"
 echo -e "${G}║      ✔  Instalación completada            ║${N}"
 echo -e "${G}╚═══════════════════════════════════════════╝${N}"
+echo
+printf "  Tiempo total: %dm%02ds\n" $((SECONDS / 60)) $((SECONDS % 60))
 echo
 echo "  Próximos pasos:"
 echo "  1. Reinicia el sistema"

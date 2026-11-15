@@ -47,6 +47,29 @@ chmod +x install.sh
 
 El script pregunta por cada componente opcional: drivers Intel, drivers NVIDIA, Plymouth con el tema `supramk4-jheff`, LibreOffice, Wine, Predator Sense para RGB/tecla Predator/ventiladores y, al final, el tema SDDM astronaut.
 
+En pantalla se ve el progreso paso a paso (`[N/18] ...`), con `✔` en verde, `⚠` en amarillo para avisos, y `✘` en rojo si algo falla. Es seguro volver a correrlo si se corta a mitad de camino.
+
+Los 18 pasos, en orden:
+
+ 1. Repositorio multilib + actualizar sistema
+ 2. yay
+ 3. Paquetes base (incluye el locale `es_PE` que usa el reloj de waybar)
+ 4. Drivers Intel *(opcional)*
+ 5. Drivers NVIDIA *(opcional, deja instrucciones de configuración manual)*
+ 6. Brillo, compilado desde fuente
+ 7. Paquetes AUR
+ 8. Plymouth *(opcional, deja instrucciones de configuración manual)*
+ 9. LibreOffice *(opcional)*
+10. Wine / Gaming *(opcional)*
+11. Predator Sense / RGB *(opcional, clona y compila el repo, deja el hook de auto-actualización)*
+12. Copiar configuraciones a `~/.config`
+13. Shell config (`.bashrc`, con backup si ya tenías uno distinto)
+14. Directorios de usuario
+15. Wallpapers
+16. Generar colores iniciales con matugen
+17. Habilitar SDDM *(opcional)*
+18. Tema SDDM astronaut *(opcional)*
+
 ### Después de instalar
 
 1. **Reinicia el sistema**
