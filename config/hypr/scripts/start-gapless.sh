@@ -7,7 +7,7 @@ else
     # Si está corriendo pero cayó en el scratchpad, recuperarlo
     WS=$(hyprctl clients -j | jq -r '.[] | select(.class == "com.github.neithern.g4music") | .workspace.name')
     if [ "$WS" = "special:scratch" ]; then
-        hyprctl dispatch movetoworkspacesilent "special:g4music,class:com.github.neithern.g4music"
+        hyprctl dispatch 'hl.dsp.window.move({ workspace = "special:g4music", follow = false, window = "class:com.github.neithern.g4music" })'
     fi
 fi
-hyprctl dispatch togglespecialworkspace g4music
+hyprctl dispatch 'hl.dsp.workspace.toggle_special("g4music")'

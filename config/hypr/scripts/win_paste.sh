@@ -8,7 +8,7 @@ ADDR=$(cat "$CUT_FILE")
 
 TARGET_WS=$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .activeWorkspace.id')
 
-hyprctl dispatch movetoworkspacesilent "${TARGET_WS},address:${ADDR}"
-hyprctl dispatch focuswindow "address:${ADDR}"
+hyprctl dispatch "hl.dsp.window.move({ workspace = ${TARGET_WS}, follow = false, window = \"address:${ADDR}\" })"
+hyprctl dispatch "hl.dsp.focus({ window = \"address:${ADDR}\" })"
 rm -f "$CUT_FILE"
 notify-send -u low -i edit-paste "Hyprland" "Ventana pegada"

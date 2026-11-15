@@ -8,7 +8,7 @@ ADDR=$(echo "$ACTIVE" | jq -r '.address // empty')
 if [ "$WS" = "special:scratch" ]; then
     # Sacar al workspace activo del monitor con foco
     TARGET=$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .activeWorkspace.id')
-    hyprctl dispatch movetoworkspacesilent "${TARGET},address:${ADDR}"
+    hyprctl dispatch "hl.dsp.window.move({ workspace = ${TARGET}, follow = false, window = \"address:${ADDR}\" })"
 else
-    hyprctl dispatch movetoworkspacesilent special:scratch,address:${ADDR}
+    hyprctl dispatch "hl.dsp.window.move({ workspace = \"special:scratch\", follow = false, window = \"address:${ADDR}\" })"
 fi

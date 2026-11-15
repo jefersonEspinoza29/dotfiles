@@ -17,8 +17,8 @@ output_path = "~/.config/eww/eww.scss"
 post_hook = "sed -i '/@charset/d' ~/.config/eww/eww.scss; ~/.config/hypr/scripts/restart-eww.sh"
 
 [templates.hyprland-colors]
-input_path = "~/.config/matugen/templates/hyprland-colors.conf"
-output_path = "~/.config/hypr/modules/colors.conf"
+input_path = "~/.config/matugen/templates/hyprland-colors.lua"
+output_path = "~/.config/hypr/colors.lua"
 post_hook = "hyprctl reload"
 
 [templates.kitty]

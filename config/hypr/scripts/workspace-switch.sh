@@ -6,7 +6,7 @@ WS=$1
 MONITOR=$(hyprctl activeworkspace -j | jq -r '.monitor')
 
 if [ "$MONITOR" = "HDMI-A-1" ]; then
-    hyprctl dispatch workspace $((WS + 9))
+    hyprctl dispatch "hl.dsp.focus({ workspace = $((WS + 9)) })"
 else
-    hyprctl dispatch workspace "$WS"
+    hyprctl dispatch "hl.dsp.focus({ workspace = $WS })"
 fi

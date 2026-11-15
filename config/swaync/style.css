@@ -1,7 +1,7 @@
 :root {
-    --bg:           rgba(15, 13, 19, 0.96);
-    --surface:      rgba(28, 27, 32, 0.95);
-    --hover:        rgba(72, 69, 78, 0.95);
+    --bg:           rgba(15, 13, 19, 0.68);
+    --surface:      rgba(28, 27, 32, 0.68);
+    --hover:        rgba(72, 69, 78, 0.75);
     --border:       rgba(205, 189, 255, 0.08);
     --accent:       #cdbdff;
     --accent-glow:  rgba(205, 189, 255, 0.30);
@@ -23,6 +23,7 @@ blankwindow {
     font-family: "JetBrainsMono Nerd Font Mono";
     font-size: 11px;
     color: var(--text);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
 }
 
 /* ===== PANEL ===== */
@@ -30,7 +31,9 @@ blankwindow {
     background: var(--bg);
     border-radius: 16px;
     border: 1px solid rgba(205, 189, 255, 0.12);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.10),
+        0 12px 40px rgba(0, 0, 0, 0.7);
     padding: 10px;
 }
 

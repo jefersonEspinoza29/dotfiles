@@ -5,7 +5,7 @@
 (defvar osd-icon "󰕾")
 
 (defwindow osd
-  :monitor 0
+  :monitor "0x0ABF"
   :geometry (geometry
     :x "0%"
     :y "20px"
@@ -45,7 +45,7 @@
 
 ; Overlay invisible — cierra el calendario mensual al hacer clic fuera
 (defwindow calendar-month-overlay
-  :monitor 0
+  :monitor "0x0ABF"
   :geometry (geometry
     :x "0px"
     :y "0px"
@@ -60,7 +60,7 @@
           ""))
 
 (defwindow calendar-widget
-  :monitor 0
+  :monitor "0x0ABF"
   :geometry (geometry
     :x "0px"
     :y "0px"
@@ -73,7 +73,7 @@
 
 ; Overlay invisible — cierra el calendario anual al hacer clic fuera
 (defwindow calendar-year-overlay
-  :monitor 0
+  :monitor "0x0ABF"
   :geometry (geometry
     :x "0px"
     :y "0px"
@@ -88,7 +88,7 @@
           ""))
 
 (defwindow calendar-year-widget
-  :monitor 0
+  :monitor "0x0ABF"
   :geometry (geometry
     :x "0px"
     :y "0px"
@@ -114,7 +114,7 @@
 
 ; Overlay invisible — cierra el widget al hacer clic fuera
 (defwindow bt-overlay
-  :monitor 0
+  :monitor "0x0ABF"
   :geometry (geometry
     :x "0px"
     :y "48px"
@@ -132,7 +132,7 @@
           ""))
 
 (defwindow bluetooth-widget
-  :monitor 0
+  :monitor "0x0ABF"
   :geometry (geometry
     :x "90px"
     :y "0px"
@@ -193,7 +193,7 @@
 
 ; Overlay — cierra el popup de contraseña al hacer clic fuera
 (defwindow wifi-pass-overlay
-  :monitor 0
+  :monitor "0x0ABF"
   :geometry (geometry
     :width "100%"
     :height "100%"
@@ -206,7 +206,7 @@
           ""))
 
 (defwindow wifi-password-widget
-  :monitor 0
+  :monitor "0x0ABF"
   :geometry (geometry
     :x "0px"
     :y "0px"
@@ -253,7 +253,7 @@
 
 ; Overlay invisible — cierra el widget al hacer clic fuera
 (defwindow wifi-overlay
-  :monitor 0
+  :monitor "0x0ABF"
   :geometry (geometry
     :x "0px"
     :y "48px"
@@ -271,7 +271,7 @@
           ""))
 
 (defwindow wifi-widget
-  :monitor 0
+  :monitor "0x0ABF"
   :geometry (geometry
     :x "90px"
     :y "0px"
@@ -327,7 +327,7 @@
 
 ; Overlay invisible — cierra el widget al hacer clic fuera
 (defwindow audio-overlay
-  :monitor 0
+  :monitor "0x0ABF"
   :geometry (geometry
     :x "0px"
     :y "48px"
@@ -342,7 +342,7 @@
           ""))
 
 (defwindow audio-widget
-  :monitor 0
+  :monitor "0x0ABF"
   :geometry (geometry
     :x "230px"
     :y "0px"
@@ -411,7 +411,7 @@
   `~/.config/eww/scripts/music-time.sh`)
 
 (defwindow music-widget
-  :monitor 0
+  :monitor "0x0ABF"
   :geometry (geometry
     :x "20px"
     :y "20px"
@@ -525,7 +525,7 @@
   `~/.config/eww/scripts/sensor-temps.sh`)
 
 (defwindow system-widget
-  :monitor 0
+  :monitor "0x0ABF"
   :geometry (geometry
     :x "20px"
     :y "300px"

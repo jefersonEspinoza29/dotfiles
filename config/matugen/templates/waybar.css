@@ -6,6 +6,7 @@
     padding: 0;
     margin: 0;
     min-height: 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
 }
 
 window#waybar {
@@ -13,14 +14,21 @@ window#waybar {
     color: {{colors.on_surface.dark.hex}};
 }
 
-/* ── Islas ───────────────────────────────────────────────── */
+/* ── Islas (liquid glass) ────────────────────────────────── */
 .modules-left,
 .modules-center,
 .modules-right {
-    background: {{colors.surface_container.dark.hex}};
-    border-radius: 12px;
+    background: linear-gradient(180deg,
+        rgba({{colors.surface_container_high.dark.red}}, {{colors.surface_container_high.dark.green}}, {{colors.surface_container_high.dark.blue}}, 0.72) 0%,
+        rgba({{colors.surface_container.dark.red}}, {{colors.surface_container.dark.green}}, {{colors.surface_container.dark.blue}}, 0.62) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 14px;
     padding: 0 12px;
     margin: 4px 0;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.25),
+        0 2px 10px rgba(0, 0, 0, 0.25);
 }
 
 /* ── Workspaces ──────────────────────────────────────────── */
@@ -46,7 +54,7 @@ window#waybar {
 
 /* vacío (punto pequeño) */
 #workspaces button.empty {
-    color: {{colors.surface_variant.dark.hex}};
+    color: {{colors.outline.dark.hex}};
     font-size: 12px;
     background: transparent;
 }
@@ -112,7 +120,7 @@ window#waybar {
 #memory    { color: {{colors.tertiary.dark.hex}}; }
 #backlight { color: {{colors.secondary.dark.hex}}; }
 
-#pulseaudio       { color: {{colors.primary_container.dark.hex}}; }
+#pulseaudio       { color: {{colors.tertiary.dark.hex}}; }
 #pulseaudio.muted { color: {{colors.outline.dark.hex}}; }
 
 /* ── Bluetooth ───────────────────────────────────────────── */
